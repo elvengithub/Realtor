@@ -1,0 +1,1 @@
+﻿const CoachingPlans = () => { return <section className='section'><div className='container'><h2 className='section-title'>CoachingPlans</h2><p>This is the CoachingPlans page for Anthony Gerard Orais Leuterio's real estate coaching platform. Functional content coming soon.</p></div></section>; }; export default CoachingPlans;

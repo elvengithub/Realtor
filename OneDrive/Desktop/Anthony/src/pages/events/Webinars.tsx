@@ -1,0 +1,1 @@
+﻿const Webinars = () => { return <section className='section'><div className='container'><h2 className='section-title'>Webinars</h2><p>This is the Webinars page for Anthony Gerard Orais Leuterio's real estate coaching platform. Functional content coming soon.</p></div></section>; }; export default Webinars;
