@@ -3,8 +3,8 @@ import { ArrowRight, Trophy, Users, Globe, PlayCircle } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 // Import assets
-import anthonyImg from '../assets/Anthony.png';
-import anthonyLightImg from '../assets/lightmode_anthony.jpg';
+import anthonyDarkImg from '../assets/tondark.jpg';
+import anthonyLightImg from '../assets/ton.jpg';
 
 const Home = () => {
   const { isDark } = useTheme();
@@ -35,7 +35,7 @@ const Home = () => {
             </div>
             <div className="reveal active">
               <img 
-                src={isDark ? anthonyImg : anthonyLightImg} 
+                src={isDark ? anthonyDarkImg : anthonyLightImg} 
                 alt="Anthony Leuterio" 
                 style={{ 
                   width: '100%', 

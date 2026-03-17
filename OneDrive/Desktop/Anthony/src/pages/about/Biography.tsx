@@ -1,6 +1,6 @@
 import { useTheme } from '../../context/ThemeContext';
-import anthonyImg from '../../assets/Anthony.png';
-import anthonyLightImg from '../../assets/lightmode_anthony.jpg';
+import anthonyDarkImg from '../../assets/tondark.jpg';
+import anthonyLightImg from '../../assets/ton.jpg';
 import { Award, Target, Globe, BookOpen } from 'lucide-react';
 
 const Biography = () => {
@@ -25,7 +25,7 @@ const Biography = () => {
             <div className="reveal active">
               <div style={{ position: 'relative' }}>
                 <img 
-                  src={isDark ? anthonyImg : anthonyLightImg} 
+                  src={isDark ? anthonyDarkImg : anthonyLightImg} 
                   alt="Anthony Leuterio" 
                   style={{ 
                     width: '100%', 
