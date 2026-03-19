@@ -13,41 +13,41 @@ const Home = () => {
     <div className="home-page">
       {/* Hero Section */}
       <section id="hero" className="hero" style={{ 
-        backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%), url(${isDark ? tonDarkImg : anthonyImg})`,
+        backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%), url(${anthonyImg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center 5%',
         minHeight: '100vh', /* Perfect viewport fit */
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        padding: '80px 8% 60px' /* Slightly shifted right for better "small" corner look */
+        padding: '100px 8% 80px 12%' /* Moved up closer to the header while keeping the right shift */
       }}>
-        <div style={{ maxWidth: '500px', textAlign: 'left', position: 'relative', zIndex: 10 }}>
-          <div className="roi-badge mb-4" style={{ display: 'inline-flex' }}>
-            <Star size={12} fill="currentColor" /> 2024 International Realtor of the Year (NAR)
-          </div>
-          <span className="script-text" style={{ color: 'var(--brand-gold)', fontSize: '1.4rem', display: 'block', marginBottom: '1rem', opacity: 0.8 }}>
+        <div style={{ maxWidth: '600px', textAlign: 'left', position: 'relative', zIndex: 10 }}>
+          <p style={{ color: 'var(--brand-gold)', fontSize: '0.9rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '0.5rem' }}>
+            2024 International Realtor of the Year (NAR)
+          </p>
+          <p style={{ color: '#FFFFFF', fontSize: '1.4rem', marginBottom: '1.5rem', fontWeight: 500, opacity: 0.9 }}>
             Transform Your Reality
-          </span>
+          </p>
           <h1 style={{ 
             marginBottom: '2rem', 
-            fontSize: 'clamp(2.5rem, 8vw, 4.5rem)', 
+            fontSize: 'clamp(2.5rem, 8vw, 4.8rem)', 
             color: '#FFFFFF', 
-            letterSpacing: '-1.5px', 
+            letterSpacing: '-2px', 
             lineHeight: 0.95,
             fontWeight: 900,
             textTransform: 'uppercase'
           }}>
             MASTER THE <br />
-            <span style={{ color: 'var(--brand-gold)' }}>SCIENCE</span><br />
+            SCIENCE <br />
             OF SCALE
           </h1>
-          <p className="mb-8" style={{ fontSize: '1.1rem', color: '#FFFFFF', maxWidth: '400px', marginBottom: '3.5rem', fontWeight: 600, lineHeight: 1.5 }}>
+          <p style={{ fontSize: '1.15rem', color: '#FFFFFF', maxWidth: '500px', marginBottom: '3.5rem', fontWeight: 400, lineHeight: 1.6, opacity: 0.95 }}>
             The world's most elite entrepreneurs and leaders rely on Anthony Leuterio's proven frameworks to accelerate growth, maximize impact, and secure their legacy.
           </p>
-          <div style={{ display: 'flex', justifyContent: 'flex-start', width: '100%' }}>
-            <Link to="/free-coaching-consultation" className="btn btn-primary" style={{ padding: '0.8rem 3.5rem', fontSize: '1rem' }}>
-              Book Consultation <ArrowRight size={18} style={{ marginLeft: '1rem' }} />
+          <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <Link to="/free-coaching-consultation" className="btn btn-primary" style={{ padding: '1rem 3.5rem', fontSize: '1.1rem' }}>
+              Book Consultation
             </Link>
           </div>
         </div>
