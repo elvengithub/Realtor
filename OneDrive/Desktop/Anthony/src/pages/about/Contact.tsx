@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, MessageSquare, Clock, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import LeadCaptureForm from '../../components/LeadCaptureForm';
 
 const Contact = () => {

@@ -1,5 +1,4 @@
-import { HelpCircle, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { HelpCircle } from 'lucide-react';
 
 const CoachingFAQ = () => {
   const faqs = [

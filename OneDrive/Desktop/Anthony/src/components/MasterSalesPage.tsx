@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle, ArrowRight, PlayCircle } from 'lucide-react';
+import { ArrowRight, PlayCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface MasterSalesPageProps {

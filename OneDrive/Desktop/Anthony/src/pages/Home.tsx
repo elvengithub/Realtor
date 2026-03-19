@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Star, ArrowRight, Trophy, Users, Globe, PlayCircle } from 'lucide-react';
+import { ArrowRight, Trophy, Users, Globe, PlayCircle } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 // Import assets

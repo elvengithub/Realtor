@@ -1,4 +1,4 @@
-import { Trophy, Users, GraduationCap, Target, Megaphone, Zap } from 'lucide-react';
+import { Trophy, Users, Target, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const OurPrograms = () => {
