@@ -150,7 +150,7 @@ const Testimonials = () => {
         <div className="container text-center">
           <h2 className="section-title">Ready to be our next success story?</h2>
           <div className="flex-center" style={{ width: '100%', marginTop: '3rem' }}>
-            <Link to="/free-coaching-consultation" className="btn btn-primary" style={{ padding: '1rem 4rem' }}>
+            <Link to="/coaching" className="btn btn-primary" style={{ padding: '1rem 4rem' }}>
               Book Your Consultation
             </Link>
           </div>

@@ -3,19 +3,19 @@ import MasterSalesPage from '../../components/MasterSalesPage';
 const CoachingCore = () => {
   return (
     <MasterSalesPage 
-      title="Coaching Core"
-      subtitle="Foundational Group Coaching"
-      description="The perfect program for agents looking to build a sustainable, predictable business. Join a community of motivated professionals and learn the foundational systems of success."
-      image="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800"
+      title="The Core Systems"
+      subtitle="Foundational Ecosystem Architecture"
+      description="This is not just sales training; it is a blueprint for domination. Learn the exact 'Market Gap' methodology that allowed Anthony to scale Filipino Homes from a local idea to a global empire. Master the art of digitizing your value chain."
+      image="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=1000"
       features={[
-        "Bi-Weekly Group Coaching Calls",
-        "Access to the Success Systems Library",
-        "Collaborative Growth Community",
-        "Quarterly Business Planning Sessions",
-        "Accountability Tracking Tools"
+        "The 'Market Gap' Analysis Framework",
+        "Digital Ecosystem Integration (Rent.ph Model)",
+        "Global Lead Generation Systems",
+        "The 'God-Family-Business' Leadership Model",
+        "Scaling from Solo Agent to Network Builder"
       ]}
-      price="Starts at $299/mo"
-      ctaText="Apply for Core"
+      price="Application Only"
+      ctaText="Apply for Access"
     />
   );
 };

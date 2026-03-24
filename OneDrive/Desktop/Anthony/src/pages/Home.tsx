@@ -1,6 +1,8 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ArrowRight, Trophy, Users, Globe, PlayCircle } from 'lucide-react';
+import { Users, Globe, Trophy, Loader2 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { supabase } from '../lib/supabase';
 
 // Import assets
 import anthonyImg from '../assets/ton1.jpg';
@@ -8,23 +10,86 @@ import tonDarkImg from '../assets/tondark1.jpg';
 
 const Home = () => {
   const { isDark } = useTheme();
+  const [content, setContent] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchContent() {
+      const { data } = await supabase.from('site_content').select('*');
+      if (data) {
+        const contentMap = data.reduce((acc: any, item: any) => {
+          acc[item.id] = item.content;
+          return acc;
+        }, {});
+        setContent(contentMap);
+      }
+      setLoading(false);
+    }
+    fetchContent();
+  }, []);
+
+  // Fallback defaults if content isn''t loaded yet
+  const hero = content?.hero || {
+    title: "MASTER THE SCIENCE OF SCALE",
+    subtitle: "2024 International Realtor of the Year (NAR)",
+    description: "The world's most elite entrepreneurs and leaders rely on Anthony Leuterio's proven frameworks to accelerate growth, maximize impact, and secure their legacy.",
+    image: anthonyImg,
+    cta_text: "Explore Coaching",
+    cta_link: "/coaching"
+  };
+
+  const intro = content?.intro || {
+    title: "The Architect of Modern Real Estate",
+    subtitle: "Founder of Filipino Homes & Leuterio Realty",
+    bio: "Anthony \"Tonton\" Leuterio is not just an entrepreneur; he is a movement builder. As the founder of the largest real estate ecosystem in the Philippines, he has empowered over 14,000 agents to achieve financial independence.",
+    quote: "My philosophy is simple: God first, then family, then business. When you build with this foundation, success isn't just a goal—it's an inevitability.",
+    image: anthonyImg
+  };
+
+  const ecosystem = content?.ecosystem || {
+    filipino_homes: { title: "Filipino Homes", stat: "14,000+ LICENSED AGENTS", description: "The largest comprehensive real estate solutions portal in the Philippines, connecting thousands of properties to global buyers." },
+    leuterio_realty: { title: "Leuterio Realty", stat: "100+ OFFICES NATIONWIDE", description: "The country's fastest-growing real estate brand, recognized globally for excellence in brokerage and consultation." },
+    rent_ph: { title: "Rent.ph", stat: "TOP RENTAL PORTAL", description: "The pioneer digital rental platform in the Philippines, revolutionizing how property management and leasing connect." }
+  };
+
+  const event = content?.event || {
+    badge: "Live Intensive",
+    title: "The Edge 2024: Global Summit",
+    date: "November 15-17, 2024",
+    location: "Dubai, UAE",
+    description: "Join Anthony Leuterio and the world's most elite real estate strategists for a three-day intensive designed to redefine your market position. This is where global legacies are architected.",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=1000",
+    cta_text: "Secure Your Seat",
+    cta_link: "/events",
+    availability: "Limited to 100 Elite Delegates",
+    day: "15",
+    month: "Nov 2024"
+  };
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-primary)' }}>
+        <Loader2 className="animate-spin" size={48} style={{ color: 'var(--brand-gold)' }} />
+      </div>
+    );
+  }
 
   return (
     <div className="home-page">
       {/* Hero Section */}
       <section id="hero" className="hero" style={{ 
-        backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%), url(${anthonyImg})`,
+        backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%), url(${hero.image?.startsWith('http') ? hero.image : anthonyImg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center 5%',
-        minHeight: '100vh', /* Perfect viewport fit */
+        minHeight: '100vh',
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        padding: '100px 8% 80px 12%' /* Moved up closer to the header while keeping the right shift */
+        padding: '100px 8% 80px 12%'
       }}>
         <div style={{ maxWidth: '600px', textAlign: 'left', position: 'relative', zIndex: 10 }}>
           <p style={{ color: 'var(--brand-gold)', fontSize: '0.9rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '0.5rem' }}>
-            2024 International Realtor of the Year (NAR)
+            {hero.subtitle}
           </p>
           <p style={{ color: '#FFFFFF', fontSize: '1.4rem', marginBottom: '1.5rem', fontWeight: 500, opacity: 0.9 }}>
             Transform Your Reality
@@ -38,23 +103,26 @@ const Home = () => {
             fontWeight: 900,
             textTransform: 'uppercase'
           }}>
-            MASTER THE <br />
-            SCIENCE <br />
-            OF SCALE
+            {hero.title.split('<br />').map((text: string, i: number) => (
+              <React.Fragment key={i}>
+                {text}
+                {i < hero.title.split('<br />').length - 1 && <br />}
+              </React.Fragment>
+            ))}
           </h1>
           <p style={{ fontSize: '1.15rem', color: '#FFFFFF', maxWidth: '500px', marginBottom: '3.5rem', fontWeight: 400, lineHeight: 1.6, opacity: 0.95 }}>
-            The world's most elite entrepreneurs and leaders rely on Anthony Leuterio's proven frameworks to accelerate growth, maximize impact, and secure their legacy.
+            {hero.description}
           </p>
           <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-            <Link to="/free-coaching-consultation" className="btn btn-primary" style={{ padding: '1rem 3.5rem', fontSize: '1.1rem' }}>
-              Book Consultation
+            <Link to={hero.cta_link} className="btn btn-primary" style={{ padding: '1rem 3.5rem', fontSize: '1.1rem' }}>
+              {hero.cta_text}
             </Link>
           </div>
         </div>
       </section>
 
       {/* Trust Bar */}
-      <section className="section py-8" style={{ background: 'var(--bg-section)', borderTop: '1px solid var(--glass-border)', borderBottom: '1px solid var(--glass-border)' }}>
+      <section className="section py-8" style={{ background: 'var(--bg-section)' }}>
         <div className="container flex-center" style={{ gap: '4rem', opacity: 0.9 }}>
           <span style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '3px', color: 'var(--brand-gold)' }}>Global Dominance:</span>
           <span style={{ color: 'var(--text-heading)', fontWeight: 900, fontSize: '0.95rem', letterSpacing: '2px' }}>FILIPINO HOMES</span>
@@ -68,15 +136,27 @@ const Home = () => {
         <div className="container">
           <div className="grid-2">
             <div className="reveal active">
-              <h2 className="section-title" style={{ marginBottom: '2rem' }}>About Anthony Orais Leuterio</h2>
-              <p className="mb-2">Anthony "Tonton" Leuterio is a visionary entrepreneur and strategic growth coach, recognized for building massive marketing networks and pioneering digital business transformation at scale.</p>
-              <p className="mb-4">With a legacy of empowering thousands of professionals and connecting global markets, Anthony now focuses on mentoring the next generation of world-class leaders and business owners.</p>
-              <Link to="/biography" className="btn btn-outline">Read Full Biography</Link>
+              <h2 className="section-title" style={{ marginBottom: '2rem' }}>
+                {intro.title.split('<br />').map((text: string, i: number) => (
+                  <React.Fragment key={i}>
+                    {text}
+                    {i < intro.title.split('<br />').length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </h2>
+              <p className="mb-2" style={{ fontSize: '1.1rem', fontWeight: 500 }}>{intro.subtitle}</p>
+              <p className="mb-4">
+                {intro.bio}
+              </p>
+              <p className="mb-4" style={{ fontStyle: 'italic', paddingLeft: '1rem', color: 'var(--text-muted)' }}>
+                "{intro.quote}"
+              </p>
+              <Link to="/about" className="btn btn-outline">Read Full Biography</Link>
             </div>
             <div className="reveal active">
               <img 
-                src={isDark ? tonDarkImg : anthonyImg} 
-                alt="Anthony Leuterio" 
+                src={intro.image?.startsWith('http') ? intro.image : (isDark ? tonDarkImg : anthonyImg)} 
+                alt={intro.name} 
                 style={{ 
                   width: '100%', 
                   height: 'auto',
@@ -93,7 +173,7 @@ const Home = () => {
       </section>
 
       {/* Ecosystem Section */}
-      <section className="section bg-light" style={{ borderTop: '1px solid var(--glass-border)' }}>
+      <section className="section bg-light">
         <div className="container">
           <div className="text-center mb-12">
             <span className="roi-badge mb-4">Full-Spectrum Authority</span>
@@ -104,24 +184,24 @@ const Home = () => {
           </div>
           <div className="grid-3" style={{ marginTop: '4rem' }}>
             <div className="card" style={{ padding: '3rem' }}>
-              <h3 style={{ color: 'var(--brand-orange)', marginBottom: '1rem' }}>Filipino Homes</h3>
-              <p className="mb-4">The largest comprehensive real estate solutions portal in the Philippines, connecting thousands of properties to global buyers.</p>
-              <div style={{ padding: '1rem 0', borderTop: '1px solid var(--glass-border)' }}>
-                <span style={{ fontWeight: 800, color: 'var(--brand-blue)' }}>14,000+ LICENSED AGENTS</span>
+              <h3 style={{ color: 'var(--brand-orange)', marginBottom: '1rem' }}>{ecosystem.filipino_homes.title}</h3>
+              <p className="mb-4">{ecosystem.filipino_homes.description}</p>
+              <div style={{ padding: '1rem 0' }}>
+                <span style={{ fontWeight: 800, color: 'var(--brand-blue)' }}>{ecosystem.filipino_homes.stat}</span>
               </div>
             </div>
             <div className="card" style={{ padding: '3rem' }}>
-              <h3 style={{ color: 'var(--brand-orange)', marginBottom: '1rem' }}>Leuterio Realty</h3>
-              <p className="mb-4">The country's fastest-growing real estate brand, recognized globally for excellence in brokerage and consultation.</p>
-              <div style={{ padding: '1rem 0', borderTop: '1px solid var(--glass-border)' }}>
-                <span style={{ fontWeight: 800, color: 'var(--brand-blue)' }}>100+ OFFICES NATIONWIDE</span>
+              <h3 style={{ color: 'var(--brand-orange)', marginBottom: '1rem' }}>{ecosystem.leuterio_realty.title}</h3>
+              <p className="mb-4">{ecosystem.leuterio_realty.description}</p>
+              <div style={{ padding: '1rem 0' }}>
+                <span style={{ fontWeight: 800, color: 'var(--brand-blue)' }}>{ecosystem.leuterio_realty.stat}</span>
               </div>
             </div>
             <div className="card" style={{ padding: '3rem' }}>
-              <h3 style={{ color: 'var(--brand-orange)', marginBottom: '1rem' }}>Rent.ph</h3>
-              <p className="mb-4">The pioneer digital rental platform in the Philippines, revolutionizing how property management and leasing connect.</p>
-              <div style={{ padding: '1rem 0', borderTop: '1px solid var(--glass-border)' }}>
-                <span style={{ fontWeight: 800, color: 'var(--brand-blue)' }}>TOP RENTAL PORTAL</span>
+              <h3 style={{ color: 'var(--brand-orange)', marginBottom: '1rem' }}>{ecosystem.rent_ph.title}</h3>
+              <p className="mb-4">{ecosystem.rent_ph.description}</p>
+              <div style={{ padding: '1rem 0' }}>
+                <span style={{ fontWeight: 800, color: 'var(--brand-blue)' }}>{ecosystem.rent_ph.stat}</span>
               </div>
             </div>
           </div>
@@ -138,21 +218,21 @@ const Home = () => {
           <div className="grid-3">
             <div className="card text-center" style={{ padding: '3rem 2rem' }}>
               <Trophy size={48} color="var(--secondary-color)" style={{ marginBottom: '1.5rem' }} />
-              <h3>Coaching Elite</h3>
-              <p>Exclusive 1-on-1 coaching for top producers looking to scale to the next level.</p>
-              <Link to="/coaching-elite" className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Learn More</Link>
+              <h3>Coaching Core</h3>
+              <p>Foundational group coaching for agents wanting to build a sustainable business.</p>
+              <Link to="/coaching/core" className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Learn More</Link>
             </div>
             <div className="card text-center" style={{ padding: '3rem 2rem' }}>
               <Users size={48} color="var(--secondary-color)" style={{ marginBottom: '1.5rem' }} />
-              <h3>Coaching Core</h3>
-              <p>Foundational group coaching for agents wanting to build a sustainable business.</p>
-              <Link to="/coaching-core" className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Learn More</Link>
+              <h3>Our Programs</h3>
+              <p>Explore our wide range of coaching services tailored to your specific needs.</p>
+              <Link to="/coaching/programs" className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Explore All</Link>
             </div>
             <div className="card text-center" style={{ padding: '3rem 2rem' }}>
               <Globe size={48} color="var(--secondary-color)" style={{ marginBottom: '1.5rem' }} />
-              <h3>Our Programs</h3>
-              <p>Explore our wide range of coaching services tailored to your specific needs.</p>
-              <Link to="/our-programs" className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Explore All</Link>
+              <h3>Our Coaches</h3>
+              <p>Meet the elite strategists certified by Anthony Leuterio.</p>
+              <Link to="/coaches" className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Meet the Team</Link>
             </div>
           </div>
         </div>
@@ -171,7 +251,7 @@ const Home = () => {
                 <li>Recruiting Roadmap</li>
                 <li>Altman Advantage</li>
               </ul>
-              <Link to="/program-online-leads-accelerator" className="btn btn-primary">Explore Training</Link>
+              <Link to="/programs/leads-accelerator" className="btn btn-primary">Explore Training</Link>
             </div>
             <div className="grid-2" style={{ gap: '1.5rem' }}>
               <div className="card" style={{ padding: '2rem' }}>
@@ -189,44 +269,58 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Upcoming Events */}
-      <section className="section">
+
+      {/* Upcoming Event */}
+      <section className="section" style={{ backgroundColor: 'var(--bg-base)' }}>
         <div className="container">
-          <div className="text-center mb-4">
-            <h2 className="section-title">Upcoming Events</h2>
-          </div>
-          <div className="grid-2">
-            <div className="card" style={{ display: 'flex', gap: '2rem', padding: '3rem' }}>
-              <div style={{ flex: '0 0 100px', textAlign: 'center' }}>
-                <span className="award-year" style={{ fontSize: '2rem', display: 'block' }}>MAY</span>
-                <span style={{ fontSize: '1.5rem', fontWeight: 700 }}>15</span>
-              </div>
-              <div>
-                <h4 className="org">Summit</h4>
-                <h3>Asian Real Estate Summit</h3>
-                <p>Bangkok, Thailand. Join global leaders for the premier real estate event of the year.</p>
-                <Link to="/summit" style={{ color: 'var(--secondary-color)', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem' }}>
-                  Register Now <ArrowRight size={16} />
-                </Link>
-              </div>
-            </div>
-            <div className="card" style={{ display: 'flex', gap: '2rem', padding: '3rem' }}>
-              <div style={{ flex: '0 0 100px', textAlign: 'center' }}>
-                <span className="award-year" style={{ fontSize: '2rem', display: 'block' }}>JUN</span>
-                <span style={{ fontSize: '1.5rem', fontWeight: 700 }}>22</span>
-              </div>
-              <div>
-                <h4 className="org">Workshop</h4>
-                <h3>The Edge Intensive</h3>
-                <p>Strategic growth training for entrepreneurs and high-impact professionals.</p>
-                <Link to="/the-edge" style={{ color: 'var(--secondary-color)', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem' }}>
-                  Register Now <ArrowRight size={16} />
-                </Link>
+          <div className="grid-2" style={{ alignItems: 'center', gap: '4rem' }}>
+            <div className="reveal active">
+              <span className="roi-badge mb-4">{event.badge}</span>
+              <h2 className="section-title" style={{ marginBottom: '1.5rem', color: 'var(--brand-gold)' }}>
+                {event.title.split('<br />').map((text: string, i: number) => (
+                  <React.Fragment key={i}>
+                    {text}
+                    {i < event.title.split('<br />').length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </h2>
+              <p style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '2rem', color: 'var(--text-heading)' }}>
+                {event.date} | {event.location}
+              </p>
+              <p className="mb-4" style={{ fontSize: '1.1rem', opacity: 0.8 }}>
+                {event.description}
+              </p>
+              <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                <Link to={event.cta_link} className="btn btn-primary">{event.cta_text}</Link>
+                <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--brand-gold)', textTransform: 'uppercase', letterSpacing: '1px' }}>{event.availability}</span>
               </div>
             </div>
-          </div>
-          <div className="text-center" style={{ marginTop: '4rem' }}>
-            <Link to="/events" className="btn btn-outline">View All Events</Link>
+            <div className="reveal active" style={{ position: 'relative' }}>
+              <div style={{ 
+                height: '400px', 
+                backgroundImage: `url(${event.image})`, 
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                borderRadius: 'var(--border-radius)',
+                boxShadow: 'var(--shadow-focus)',
+                border: '1px solid var(--glass-border)'
+              }}></div>
+              <div style={{ 
+                position: 'absolute', 
+                bottom: '-20px', 
+                right: '-20px', 
+                background: 'var(--luxury-gradient)', 
+                color: 'var(--brand-black)', 
+                padding: '1.5rem 2rem', 
+                fontWeight: 900, 
+                borderRadius: '4px',
+                textAlign: 'center',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
+              }}>
+                <div style={{ fontSize: '2rem', lineHeight: 1 }}>{event.day}</div>
+                <div style={{ fontSize: '0.8rem', textTransform: 'uppercase' }}>{event.month}</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -239,7 +333,7 @@ const Home = () => {
           </div>
           <div className="grid-3">
             <div className="card" style={{ padding: '0', overflow: 'hidden' }}>
-              <div style={{ height: '200px', background: '#ccc' }}></div>
+              <div style={{ height: '240px', backgroundImage: `url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800')`, backgroundSize: 'cover' }}></div>
               <div style={{ padding: '2rem' }}>
                 <h4 className="org">Blog</h4>
                 <h3>The Future of Digital Real Estate</h3>
@@ -248,23 +342,21 @@ const Home = () => {
               </div>
             </div>
             <div className="card" style={{ padding: '0', overflow: 'hidden' }}>
-              <div style={{ height: '200px', background: '#ccc', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <PlayCircle size={64} color="white" />
-              </div>
+              <div style={{ height: '240px', backgroundImage: `url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800')`, backgroundSize: 'cover' }}></div>
               <div style={{ padding: '2rem' }}>
-                <h4 className="org">Podcast</h4>
-                <h3>Interview with Global Investors</h3>
-                <p>Insights on cross-border transactions and the OFW market.</p>
-                <Link to="/podcast" style={{ color: 'var(--secondary-color)', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '1.5rem' }}>Listen Now</Link>
+                <h4 className="org">Strategy</h4>
+                <h3>5 Mistakes in Digital Marketing</h3>
+                <p>Avoid these common errors that kill your conversion rates.</p>
+                <Link to="/blog" style={{ color: 'var(--secondary-color)', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '1.5rem' }}>Read More</Link>
               </div>
             </div>
             <div className="card" style={{ padding: '0', overflow: 'hidden' }}>
-              <div style={{ height: '200px', background: '#ccc' }}></div>
+              <div style={{ height: '240px', backgroundImage: `url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800')`, backgroundSize: 'cover' }}></div>
               <div style={{ padding: '2rem' }}>
-                <h4 className="org">Video</h4>
-                <h3>Filipino Homes Success Stories</h3>
-                <p>Real agents sharing their journey from zero to top producer.</p>
-                <Link to="/tfshow" style={{ color: 'var(--secondary-color)', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '1.5rem' }}>Watch Video</Link>
+                <h4 className="org">Tech</h4>
+                <h3>How AI is Changing Real Estate</h3>
+                <p>Explore the frontier of AI-driven property marketing.</p>
+                <Link to="/blog" style={{ color: 'var(--secondary-color)', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '1.5rem' }}>Read More</Link>
               </div>
             </div>
           </div>
@@ -313,17 +405,17 @@ const Home = () => {
             </div>
           </div>
           <div className="text-center" style={{ marginTop: '5rem' }}>
-            <Link to="/testimonials" className="btn btn-outline" style={{ padding: '1rem 4rem' }}>View More Success Stories</Link>
+            <Link to="/coaching/testimonials" className="btn btn-outline" style={{ padding: '1rem 4rem' }}>View More Success Stories</Link>
           </div>
         </div>
       </section>
 
       {/* Consultation CTA */}
-      <section className="section" style={{ background: 'var(--bg-section)', color: 'var(--text-main)', borderTop: '4px solid var(--brand-orange)' }}>
+      <section className="section" style={{ background: 'var(--bg-section)', color: 'var(--text-main)' }}>
         <div className="container text-center">
           <h2 className="section-title" style={{ fontSize: '3rem', color: 'var(--text-heading)' }}>Ready to Take Command?</h2>
-          <p className="mb-4" style={{ fontSize: '1.4rem', opacity: 0.9, maxWidth: '850px', margin: '0 auto 4rem', fontWeight: 500, color: 'var(--text-main)' }}>The window to redefine your future is narrowing. Secure your diagnostic strategy session today.</p>
-          <Link to="/free-coaching-consultation" className="btn btn-primary" style={{ padding: '1.8rem 5rem', fontSize: '1.2rem' }}>Initiate Your Transformation</Link>
+          <p className="mb-4" style={{ fontSize: '1.4rem', opacity: 0.9, maxWidth: '850px', margin: '0 auto 4rem', fontWeight: 500, color: 'var(--text-main)' }}>The window to redefine your future is narrowing. Secure your strategy session today.</p>
+          <a href="mailto:consultation@tonleuterio.com" className="btn btn-primary" style={{ padding: '1.8rem 5rem', fontSize: '1.2rem' }}>Inquire for Consultation</a>
         </div>
       </section>
     </div>

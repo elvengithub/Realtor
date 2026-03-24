@@ -210,13 +210,12 @@ h3 { font-size: clamp(1.4rem, 4vw, 1.9rem); margin-bottom: 1rem; }
 
 .accent-bar {
     width: 4px;
-    background: var(--brand-gold);
+    background: var(--text-muted);
     margin-right: 1.5rem;
 }
 
 .quote-block {
     display: flex;
-    border-left: 4px solid var(--brand-gold);
     padding-left: 2rem;
     margin: 2rem 0;
 }
@@ -253,24 +252,24 @@ h3 { font-size: clamp(1.4rem, 4vw, 1.9rem); margin-bottom: 1rem; }
 
 .btn-outline { 
     background: transparent;
-    border: 2px solid var(--brand-gold); 
-    color: var(--brand-gold);
+    border: 2px solid var(--text-heading); 
+    color: var(--text-heading);
     backdrop-filter: blur(5px);
 }
 .btn-outline:hover { 
-    background: var(--brand-gold); 
-    color: var(--brand-black); 
+    background: var(--text-heading); 
+    color: var(--bg-base); 
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(var(--brand-gold-rgb), 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="dark"] .btn-outline {
-    border-color: var(--brand-gold-vibrant);
-    color: var(--brand-gold-vibrant);
+    border-color: var(--text-heading);
+    color: var(--text-heading);
 }
 
 [data-theme="dark"] .btn-outline:hover {
-    background: var(--luxury-gradient);
+    background: var(--text-heading);
     color: var(--brand-black);
     border-color: transparent;
 }
@@ -282,7 +281,6 @@ h3 { font-size: clamp(1.4rem, 4vw, 1.9rem); margin-bottom: 1rem; }
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     padding: 1.2rem 0; z-index: 1000;
-    border-bottom: 1px solid var(--glass-border);
     transition: var(--transition-fast);
 }
 
@@ -304,7 +302,6 @@ h3 { font-size: clamp(1.4rem, 4vw, 1.9rem); margin-bottom: 1rem; }
 
 .theme-toggle {
     background: var(--bg-card);
-    border: 1px solid var(--glass-border);
     color: var(--secondary-color);
     cursor: pointer;
     margin-left: 1.5rem;
@@ -317,6 +314,7 @@ h3 { font-size: clamp(1.4rem, 4vw, 1.9rem); margin-bottom: 1rem; }
     transition: var(--transition-fluid);
     box-shadow: var(--shadow-ambient);
     padding: 0;
+    border: none;
 }
 
 .theme-toggle:hover {
@@ -333,15 +331,13 @@ h3 { font-size: clamp(1.4rem, 4vw, 1.9rem); margin-bottom: 1rem; }
     padding: 3rem 2rem;
     box-shadow: var(--shadow-ambient);
     transition: var(--transition-fluid);
-    border: 1px solid var(--glass-border);
     position: relative;
     z-index: 1;
 }
 
 .card:hover {
     transform: translateY(-12px);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--glass-border);
-    border-color: var(--brand-gold);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
 }
 
 .card svg {
@@ -399,7 +395,6 @@ h3 { font-size: clamp(1.4rem, 4vw, 1.9rem); margin-bottom: 1rem; }
 footer { 
     padding: 6rem 0 3rem; 
     background: var(--bg-section); 
-    border-top: 1px solid var(--glass-border); 
 }
 .footer-grid {
     display: grid;
@@ -428,12 +423,12 @@ footer {
     transform: translateY(-3px);
 }
 
-.footer-bottom { border-top: 1px solid var(--glass-border); padding-top: 2.5rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+.footer-bottom { padding-top: 2.5rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
 
 /* Forms */
 .form-group { margin-bottom: 1.8rem; }
 .form-group label { display: block; margin-bottom: 0.6rem; font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
-.form-control { width: 100%; padding: 1rem 1.2rem; border: 1px solid var(--glass-border); border-radius: 8px; background: var(--bg-card); color: var(--text-main); font-family: inherit; font-size: 1rem; transition: var(--transition-fast); }
+.form-control { width: 100%; padding: 1rem 1.2rem; border-radius: 8px; background: var(--bg-card); color: var(--text-main); font-family: inherit; font-size: 1rem; transition: var(--transition-fast); border: 1px solid transparent; }
 .form-control:focus { outline: none; border-color: var(--brand-gold); box-shadow: 0 0 0 4px rgba(var(--brand-gold-rgb), 0.1); }
 
 /* Helpers */

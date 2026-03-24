@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Trophy, Users, Star, HelpCircle, Globe } from 'lucide-react';
+import { Trophy, Star, HelpCircle, Globe } from 'lucide-react';
 
 const Coaching = () => {
   return (
@@ -11,15 +11,9 @@ const Coaching = () => {
           <div className="grid-2" style={{ textAlign: 'left' }}>
             <div className="card">
               <Trophy size={48} color="var(--secondary-color)" className="mb-2" />
-              <h3>Coaching Elite</h3>
-              <p>The gold standard for top producers. One-on-one sessions with our most senior coaches to scale your business exponentially.</p>
-              <Link to="/coaching-elite" className="btn btn-primary" style={{ marginTop: '2rem' }}>Learn More</Link>
-            </div>
-            <div className="card">
-              <Users size={48} color="var(--secondary-color)" className="mb-2" />
               <h3>Coaching Core</h3>
               <p>Designed for leaders building their foundations. Group coaching, shared systems, and community accountability.</p>
-              <Link to="/coaching-core" className="btn btn-primary" style={{ marginTop: '2rem' }}>Learn More</Link>
+              <Link to="/coaching/core" className="btn btn-primary" style={{ marginTop: '2rem' }}>Learn More</Link>
             </div>
           </div>
         </div>
@@ -41,9 +35,9 @@ const Coaching = () => {
             </div>
             <div className="text-center">
               <HelpCircle size={32} color="var(--secondary-color)" />
-              <h4 style={{ marginTop: '1rem' }}>Support & FAQ</h4>
-              <p>Have questions? Our FAQ section covers everything you need to know.</p>
-              <Link to="/coaching-faq" style={{ color: 'var(--secondary-color)', textDecoration: 'none', fontWeight: 600 }}>Visit FAQ</Link>
+              <h4 style={{ marginTop: '1rem' }}>Support</h4>
+              <p>Have questions? Our support team is here to help you scale.</p>
+              <a href="mailto:support@tonleuterio.com" style={{ color: 'var(--secondary-color)', textDecoration: 'none', fontWeight: 600 }}>Email Support</a>
             </div>
           </div>
         </div>
@@ -53,9 +47,8 @@ const Coaching = () => {
         <div className="container text-center">
           <h2 className="section-title">Ready to Start?</h2>
           <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/free-coaching-consultation" className="btn btn-primary">Free Consultation</Link>
-            <Link to="/testimonials" className="btn btn-outline">Success Stories</Link>
-            <Link to="/real-estate-coaching-programs" className="btn btn-outline">View All Programs</Link>
+            <Link to="/coaching/testimonials" className="btn btn-primary">Success Stories</Link>
+            <Link to="/coaching/programs" className="btn btn-outline">View All Programs</Link>
           </div>
         </div>
       </section>

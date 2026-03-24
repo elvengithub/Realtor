@@ -1,4 +1,4 @@
-import { Trophy, Users, GraduationCap, Target, Megaphone, Zap } from 'lucide-react';
+import { Trophy, Users, Target, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const OurPrograms = () => {
@@ -7,25 +7,25 @@ const OurPrograms = () => {
       title: "Coaching Elite",
       icon: <Trophy size={32} />,
       desc: "Exclusive 1-on-1 mentorship for high-volume producers.",
-      link: "/coaching-elite"
+      link: "/coaching"
     },
     {
       title: "Coaching Core",
       icon: <Users size={32} />,
       desc: "Foundational group coaching for consistent growth.",
-      link: "/coaching-core"
+      link: "/coaching/core"
     },
     {
       title: "OLA Masterclass",
       icon: <Zap size={32} />,
       desc: "Master the Online Leads Accelerator system.",
-      link: "/program-online-leads-accelerator"
+      link: "/programs/leads-accelerator"
     },
     {
       title: "Prospecting Bootcamp",
       icon: <Target size={32} />,
       desc: "30 days of high-velocity lead generation.",
-      link: "/program-prospecting-bootcamp"
+      link: "/programs/bootcamp"
     }
   ];
 
