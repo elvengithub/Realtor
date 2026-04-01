@@ -1,10 +1,7 @@
 import Biography from "@/src/pages/about/Biography";
-import ProtectedRoute from "@/src/components/ProtectedRoute";
+
+export const dynamic = 'force-dynamic';
 
 export default function Page() {
-  return (
-    <ProtectedRoute>
-      <Biography />
-    </ProtectedRoute>
-  );
+  return <Biography />;
 }

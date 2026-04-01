@@ -1,105 +1,98 @@
-# Anthony Gerard Orais Leuterio | Global Real Estate Coaching Platform
+# Anthony Leuterio | Real Estate Coaching Platform
 
-1.  **Main Website**: A high-performance **Next.js 15** application (App Router) for showcase and lead generation.
-2.  **Admin Panel**: A separate Next.js dashboard for managing properties and inquiries.
-3.  **Supabase Backend**: A scalable database and authentication layer shared by both applications.
+A Next.js 15 application with Supabase backend for Anthony Leuterio's real estate coaching business.
 
 ---
 
-## 🚀 How to Run
+## 🚀 Getting Started
 
-### 1. Main Website (Portfolio)
-The main website is located in the root directory.
 ```bash
-# Install dependencies
-
 # Install dependencies
 npm install
 
-# Start development server
+# Run development server
 npm run dev
+
+# Build for production
+npm run build
+
+# Run linter
+npm run lint
 ```
 
-**Route Structure:**
-- `/` - Home
-- `/coaching` - Coaching Overview (Sub-routes: `/core`, `/programs`, `/testimonials`)
-- `/programs` - Training Programs (Sub-routes: `/leads-accelerator`, `/bootcamp`, `/roadmap`)
-- `/coaches` - Meet the Team
-- `/blog` - Content Hub
-- `/about` - Biography
+Visit `http://localhost:3000`
 
-### 2. Admin Panel (Dashboard)
-The admin panel is located in the `admin/` directory.
-```bash
-# Navigate to admin directory
-cd admin
+---
 
-# Install dependencies
-npm install
+## 📁 Project Structure
 
-# Start development server
-npm run dev
+```
+├── app/                    # Next.js App Router pages
+│   ├── (dashboard)/       # Protected dashboard routes
+│   ├── (public)/          # Public pages (coaching, programs, etc.)
+│   └── api/               # API routes
+├── src/
+│   ├── components/        # React components
+│   ├── context/           # React context providers
+│   ├── hooks/             # Custom hooks
+│   ├── lib/               # Utilities (Supabase, CMS)
+│   └── middleware.ts      # Auth middleware
+├── supabase/              # Database schemas
+└── public/                # Static assets
 ```
 
 ---
 
-## 🔐 Authentication & Security
+## 🔐 Authentication
 
-### Admin Access
-The Admin Panel is protected by **Supabase Auth** and Next.js **Middleware**.
-- **Login Page**: Accessible at `/login`.
-- **Route Protection**: All dashboard routes (`/`, `/properties`, `/inquiries`) require an authenticated session. Unauthenticated users are automatically redirected to the login page.
-- **Logout**: Secured logout functionality via the Sidebar.
-
-### Test Credentials
-For development and testing purposes, you can use the following accounts:
-- **Admin**: `admin@test.com` / `admin123`
-- **User**: `user@test.com` / `user123`
-
-*Note: You must create these users in your Supabase dashboard first (see Database Setup).*
-
-### User Roles & Profiles
-The database includes a `profiles` table linked to `auth.users` via a trigger.
-- **Roles**: `admin` and `user`.
-- **Automatic Profiling**: New sign-ups automatically create a entry in the `profiles` table.
-- **Access Control**: RLS (Row Level Security) policies ensure that users can only view their own profile data.
-
----
-
-## 🗄 Database Setup (Supabase)
-
-1.  Create a project on [Supabase.com](https://supabase.com).
-2.  Run the contents of `supabase/supabase_schema.sql` in the **SQL Editor**. This will:
-    - Create `properties`, `inquiries`, and `profiles` tables.
-    - Setup **RLS Policies** for public and admin access.
-    - Create the **handle_new_user** trigger for automated profile creation.
-3.  Add your project credentials to `admin/.env.local`:
-    - `NEXT_PUBLIC_SUPABASE_URL`
-    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- Powered by **Supabase Auth** with SSR support
+- Dashboard routes protected by middleware
+- Login at `/login`
 
 ---
 
 ## 🛠 Tech Stack
 
-### Main Website
-- **React 18** + **TypeScript**
-- **Vite** (Ultra-fast build tool)
-- **Vanilla CSS** (Custom Design System)
-
-### Admin Panel
-- **Next.js 16** (App Router & Turbopack)
-- **Tailwind CSS 4**
-- **Supabase SSR** (Server-Side Rendering Auth)
+- **Next.js 15** (App Router)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS**
+- **Supabase** (Database & Auth)
+- **Framer Motion**
+- **Lucide React**
 
 ---
 
-## 📁 Project Structure
-- `admin/`: Next.js admin dashboard.
-- `app/`: Main website (Next.js App Router).
-- `src/`: Shared components, contexts, and hooks.
-- `supabase/`: Database schemas and initialization scripts.
-- `public/`: Static assets and media.
-- `legacy/`: Legacy HTML/CSS/JS files for reference.
+## 🗄 Supabase Setup
+
+1. Create a project on [Supabase.com](https://supabase.com)
+2. Run `supabase/supabase_schema.sql` in the SQL Editor
+3. Add credentials to `.env.local`:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 ---
-© 2026 Anthony Gerard Orais Leuterio. All rights reserved.
+
+## 📝 Routes
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home |
+| `/coaching` | Coaching Overview |
+| `/coaching/core` | Core Coaching |
+| `/coaching/programs` | Programs |
+| `/coaching/testimonials` | Testimonials |
+| `/programs/bootcamp` | Prospecting Bootcamp |
+| `/programs/leads-accelerator` | Leads Accelerator |
+| `/programs/roadmap` | Recruiting Roadmap |
+| `/coaches` | Our Coaches |
+| `/blog` | Blog |
+| `/about` | Biography |
+| `/dashboard` | Dashboard (Protected) |
+| `/properties` | Properties (Protected) |
+| `/settings` | CMS Settings (Protected) |
+| `/login` | Login |
+
+---
+
+© 2026 Anthony Leuterio. All rights reserved.

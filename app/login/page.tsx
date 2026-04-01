@@ -9,7 +9,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isSignUp, setIsSignUp] = useState(false);
   const router = useRouter();
 
   const handleAuth = async (e: React.FormEvent) => {
@@ -17,21 +16,13 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
 
-    const { error } = isSignUp 
-      ? await supabase.auth.signUp({ email, password })
-      : await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
       setError(error.message);
       setLoading(false);
     } else {
-      if (isSignUp) {
-        alert('Verification email sent! Please check your inbox.');
-        setIsSignUp(false);
-        setLoading(false);
-      } else {
-        router.push('/');
-      }
+      router.push('/dashboard');
     }
   };
 
@@ -43,10 +34,10 @@ export default function LoginPage() {
             <Building2 size={32} />
           </div>
           <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--text-heading)', marginBottom: '0.5rem' }}>
-            {isSignUp ? 'Create Account' : 'Welcome Back'}
+            Admin Login
           </h2>
           <p style={{ color: 'var(--text-body)', fontSize: '0.875rem' }}>
-            {isSignUp ? 'Sign up to start your journey' : 'Sign in to access your coaching dashboard'}
+            Sign in to access your coaching dashboard
           </p>
         </div>
 
@@ -109,19 +100,9 @@ export default function LoginPage() {
             }}
           >
             {loading ? <Loader2 size={20} className="animate-spin" /> : null}
-            {loading ? (isSignUp ? 'Creating Account...' : 'Signing In...') : (isSignUp ? 'Sign Up' : 'Sign In')}
+            {loading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
-
-        <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-          <button 
-            type="button"
-            onClick={() => setIsSignUp(!isSignUp)}
-            style={{ background: 'none', border: 'none', color: 'var(--brand-gold)', cursor: 'pointer', fontSize: '0.875rem' }}
-          >
-            {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
-          </button>
-        </div>
       </div>
     </div>
   );

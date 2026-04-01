@@ -4,9 +4,7 @@ import "../src/style.css";
 import { ThemeProvider } from "../src/context/ThemeContext";
 import { AccessibilityProvider } from "../src/context/AccessibilityContext";
 import { AuthProvider } from "../src/context/AuthContext";
-import Navbar from "../src/components/Navbar";
-import Footer from "../src/components/Footer";
-import AccessibilityWidget from "../src/components/AccessibilityWidget";
+import RootLayoutClient from "./RootLayoutClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,12 +24,7 @@ export default function RootLayout({
         <AuthProvider>
           <ThemeProvider>
             <AccessibilityProvider>
-              <div className="layout">
-                <Navbar />
-                <main>{children}</main>
-                <Footer />
-                <AccessibilityWidget />
-              </div>
+              <RootLayoutClient>{children}</RootLayoutClient>
             </AccessibilityProvider>
           </ThemeProvider>
         </AuthProvider>

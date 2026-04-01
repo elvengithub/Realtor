@@ -1,14 +1,26 @@
 "use client";
 import { useTheme } from '../../context/ThemeContext';
+import { useAuth } from '../../context/AuthContext';
 import anthonyDarkImg from '../../assets/tondark1.jpg';
 import anthonyLightImg from '../../assets/ton1.jpg';
-import { Award, Target, Globe, BookOpen, Heart, Users, Zap } from 'lucide-react';
+import { Award, Globe, Zap, Pencil } from 'lucide-react';
+import Link from 'next/link';
 
 const Biography = () => {
   const { isDark } = useTheme();
+  const { user } = useAuth();
 
   return (
-    <div className="biography-page">
+    <div className="biography-page" style={{ position: 'relative' }}>
+      {user && (
+        <Link 
+          href="/content" 
+          style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 100, background: 'var(--brand-gold)', color: 'white', padding: '1rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
+          title="Edit Content"
+        >
+          <Pencil size={24} />
+        </Link>
+      )}
       {/* Executive Narrative Hero */}
       <section className="section" style={{ paddingTop: '7rem', background: 'var(--bg-section)' }}>
         <div className="container">

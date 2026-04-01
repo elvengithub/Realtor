@@ -74,7 +74,16 @@ export const AccessibilityProvider: React.FC<{ children: ReactNode }> = ({ child
 export const useAccessibility = () => {
   const context = useContext(AccessibilityContext);
   if (context === undefined) {
-    throw new Error('useAccessibility must be used within an AccessibilityProvider');
+    return { 
+      fontSize: 100, 
+      isReadable: false, 
+      isColorBlind: false, 
+      increaseFontSize: () => {}, 
+      decreaseFontSize: () => {}, 
+      toggleReadable: () => {}, 
+      toggleColorBlind: () => {}, 
+      resetAccessibility: () => {} 
+    };
   }
   return context;
 };

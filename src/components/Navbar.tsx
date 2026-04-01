@@ -32,13 +32,19 @@ const Navbar = () => {
     router.push('/');
   };
 
-  const navLinks = [
+  const mainLinks = [
     { name: 'Home', path: '/' },
     { name: 'Coaching', path: '/coaching' },
     { name: 'Content', path: '/blog' },
     { name: 'Testimonials', path: '/coaching/testimonials' },
     { name: 'About', path: '/about' },
   ];
+
+  const adminLinks = user ? [
+    { name: 'Dashboard', path: '/dashboard' },
+  ] : [];
+
+  const navLinks = [...mainLinks, ...adminLinks];
 
   return (
     <nav id="navbar">
@@ -47,17 +53,15 @@ const Navbar = () => {
           {firstName} <span style={{ color: 'var(--text-heading)' }}>{restName}</span>
         </Link>
         
-        {user && (
-          <ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-            {navLinks.map((link) => (
-              <li key={link.path}>
-                <Link href={link.path} onClick={() => setIsMenuOpen(false)}>
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+        <ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+          {navLinks.map((link) => (
+            <li key={link.path}>
+              <Link href={link.path} onClick={() => setIsMenuOpen(false)}>
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
@@ -71,8 +75,8 @@ const Navbar = () => {
                   <UserIcon size={18} />
                   <span className="hide-mobile">{(user.email || "").split('@')[0]}</span>
                 </div>
-                <a 
-                  href="/admin/settings"
+                <Link 
+                  href="/settings"
                   className="theme-toggle"
                   style={{ 
                     background: 'var(--brand-gold)', 
@@ -84,7 +88,7 @@ const Navbar = () => {
                   title="Admin Settings"
                 >
                   <Settings size={20} />
-                </a>
+                </Link>
                 <button 
                   onClick={handleLogout}
                   className="btn-secondary"

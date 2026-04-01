@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Users, Globe, Trophy, Loader2 } from 'lucide-react';
+import { Users, Globe, Trophy, Loader2, Pencil } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 
 // Import assets
@@ -11,6 +12,7 @@ import tonDarkImg from '../assets/tondark1.jpg';
 
 const Home = () => {
   const { isDark } = useTheme();
+  const { user } = useAuth();
   const [content, setContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -86,8 +88,18 @@ const Home = () => {
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        padding: '100px 8% 80px 12%'
+        padding: '100px 8% 80px 12%',
+        position: 'relative'
       }}>
+        {user && (
+          <Link 
+            href="/content" 
+            style={{ position: 'absolute', top: '100px', right: '2rem', zIndex: 100, background: 'var(--brand-gold)', color: 'white', padding: '0.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
+            title="Edit Hero Content"
+          >
+            <Pencil size={20} />
+          </Link>
+        )}
         <div style={{ maxWidth: '600px', textAlign: 'left', position: 'relative', zIndex: 10 }}>
           <p style={{ color: 'var(--brand-gold)', fontSize: '0.9rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '0.5rem' }}>
             {hero.subtitle}
@@ -133,7 +145,16 @@ const Home = () => {
       </section>
 
       {/* Brand Introduction */}
-      <section className="section bg-light">
+      <section className="section bg-light" style={{ position: 'relative' }}>
+        {user && (
+          <Link 
+            href="/content" 
+            style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 100, background: 'var(--brand-gold)', color: 'white', padding: '0.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
+            title="Edit Introduction Content"
+          >
+            <Pencil size={20} />
+          </Link>
+        )}
         <div className="container">
           <div className="grid-2">
             <div className="reveal active">
@@ -174,7 +195,16 @@ const Home = () => {
       </section>
 
       {/* Ecosystem Section */}
-      <section className="section bg-light">
+      <section className="section bg-light" style={{ position: 'relative' }}>
+        {user && (
+          <Link 
+            href="/content" 
+            style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 100, background: 'var(--brand-gold)', color: 'white', padding: '0.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
+            title="Edit Ecosystem Content"
+          >
+            <Pencil size={20} />
+          </Link>
+        )}
         <div className="container">
           <div className="text-center mb-12">
             <span className="roi-badge mb-4">Full-Spectrum Authority</span>
@@ -272,7 +302,16 @@ const Home = () => {
 
 
       {/* Upcoming Event */}
-      <section className="section" style={{ backgroundColor: 'var(--bg-base)' }}>
+      <section className="section" style={{ backgroundColor: 'var(--bg-base)', position: 'relative' }}>
+        {user && (
+          <Link 
+            href="/content" 
+            style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 100, background: 'var(--brand-gold)', color: 'white', padding: '0.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
+            title="Edit Event Content"
+          >
+            <Pencil size={20} />
+          </Link>
+        )}
         <div className="container">
           <div className="grid-2" style={{ alignItems: 'center', gap: '4rem' }}>
             <div className="reveal active">
@@ -408,6 +447,15 @@ const Home = () => {
           <div className="text-center" style={{ marginTop: '5rem' }}>
             <Link href="/coaching/testimonials" className="btn btn-outline" style={{ padding: '1rem 4rem' }}>View More Success Stories</Link>
           </div>
+        </div>
+      </section>
+
+      {/* Admin Login */}
+      <section className="section" style={{ background: 'var(--bg-base)', padding: '2rem 0', borderTop: '1px solid var(--border-color)' }}>
+        <div className="container text-center">
+          <Link href="/login" style={{ color: 'var(--text-muted)', fontSize: '0.875rem', textDecoration: 'none', opacity: 0.6, transition: 'opacity 0.2s' }}>
+            Admin Login
+          </Link>
         </div>
       </section>
 

@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { CheckCircle, ArrowRight, PlayCircle } from 'lucide-react';
+import { ArrowRight, PlayCircle } from 'lucide-react';
 import Link from 'next/link';
 
 interface MasterSalesPageProps {

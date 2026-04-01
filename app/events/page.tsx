@@ -1,6 +1,5 @@
 "use client";
 import React from 'react';
-import ProtectedRoute from "@/src/components/ProtectedRoute";
 
 const EventsPage = () => {
   return (
@@ -29,10 +28,4 @@ const EventsPage = () => {
   );
 };
 
-export default function Page() {
-  return (
-    <ProtectedRoute>
-      <EventsPage />
-    </ProtectedRoute>
-  );
-}
+export default EventsPage;
