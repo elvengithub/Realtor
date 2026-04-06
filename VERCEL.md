@@ -52,16 +52,25 @@ Follow the prompts, then add env vars in the dashboard or with `vercel env add`.
 - Confirm `/` and public pages load.
 - Test `/login` and dashboard routes after Supabase auth is configured.
 
-## 4. Troubleshooting
+## 4. Git branch for production
+
+Vercel deploys whatever branch you set under **Settings → Git → Production Branch** (often `main` or `master`).
+
+If that branch did not contain the Next.js app (only stray folders or an empty repo), the “build” can finish in milliseconds with almost no output. The fix is to point production at the branch that has `package.json` and `next.config.js` (this repo: **`main`**), or update **`master`** to match **`main`** so either branch works.
+
+Do **not** add a root `vercel.json` with a catch-all rewrite like `"/(.*)" → "/"` for this project; Next.js already handles routes, and that pattern breaks App Router behavior on Vercel.
+
+## 5. Troubleshooting
 
 | Issue | What to check |
 |--------|----------------|
+| Build completes in ~100ms, no real Next.js build | Wrong production branch, or repo missing `package.json` on that branch. Set Production Branch to `main` or ensure `master` includes the full app. |
 | Build fails on `npm install` | Ensure `.npmrc` is committed; run `npm install` locally to refresh `package-lock.json` if you changed dependencies. |
 | Build fails on ESLint | Run `npm run build` locally. The project extends `next/core-web-vitals` with `react/no-unescaped-entities` disabled so content-heavy pages do not block the build. |
 | Auth or dashboard broken | Confirm `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are set for the environment you are testing and **redeploy** after changing them. |
 | Middleware / edge errors | Middleware skips the Supabase client if those env vars are missing, so the site stays up; protected routes redirect to `/login` until Supabase is configured. |
 
-## 5. Local parity with production
+## 6. Local parity with production
 
 ```bash
 cp .env.example .env.local
