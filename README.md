@@ -22,6 +22,14 @@ npm run lint
 
 Visit `http://localhost:3000`
 
+Copy `.env.example` to `.env.local` and add your Supabase URL and anon key before using auth or the dashboard.
+
+---
+
+## ☁ Production (Vercel)
+
+Step-by-step deploy instructions, environment variables, and troubleshooting: **[VERCEL.md](./VERCEL.md)**.
+
 ---
 
 ## 📁 Project Structure
@@ -68,15 +76,11 @@ Visit `http://localhost:3000`
 1. Create a project on [Supabase.com](https://supabase.com)
 2. Run `supabase/supabase_schema.sql` in the SQL Editor
 3. Run `node supabase/init_supabase.js` to initialize the admin user (after configuring the service role key)
-4. Use the following credentials for testing:
+4. In the Supabase dashboard, open **Project Settings → API** and copy **Project URL** and the **anon public** key into `.env.local` (see `.env.example`). Do not commit secrets to git.
 
-### 🔗 Connection Details
-- **Supabase URL**: `https://csteoeudjuzyhkhjaszo.supabase.co`
-- **Anon Key**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzdGVvZXVkanV6eWhraGphc3pvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNDg2MDksImV4cCI6MjA4OTgyNDYwOX0.R2IsssIzOYjDMQiu_0Ona6zjI3COy2ui_swbFpFaroU`
+### 👤 Admin user
 
-### 👤 Default Admin Account
-- **Email**: `admin@leuterio.com`
-- **Password**: `admin123`
+After running `node supabase/init_supabase.js` with your **service role** key configured, sign in with the admin account you created (not committed here). If credentials were ever exposed in git history, rotate keys in Supabase and update Vercel/local env.
 
 ---
 
