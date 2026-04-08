@@ -88,3 +88,26 @@ DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
+
+-- 6. Companies Table (Ecosystem Partners)
+CREATE TABLE IF NOT EXISTS companies (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  location TEXT,
+  logo_url TEXT,
+  is_top BOOLEAN DEFAULT false,
+  display_order INTEGER DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Enable RLS for Companies
+ALTER TABLE companies ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public read companies" ON companies;
+CREATE POLICY "Public read companies" ON companies
+  FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Admin CRUD companies" ON companies;
+CREATE POLICY "Admin CRUD companies" ON companies
+  FOR ALL USING (auth.uid() IS NOT NULL);

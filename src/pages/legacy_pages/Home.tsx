@@ -6,6 +6,7 @@ import { Users, Globe, Trophy, Loader2, Pencil } from 'lucide-react';
 import { useTheme } from '@/src/context/ThemeContext';
 import { useAuth } from '@/src/context/AuthContext';
 import { supabase } from '@/src/lib/supabase';
+import { fetchTopCompanies } from '@/src/lib/cms';
 
 // Import assets
 import anthonyImg from '@/src/assets/ton1.jpg';
@@ -15,21 +16,31 @@ const Home = () => {
   const { isDark } = useTheme();
   const { user } = useAuth();
   const [content, setContent] = useState<any>(null);
+  const [companies, setCompanies] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchContent() {
-      const { data } = await supabase.from('site_content').select('*');
-      if (data) {
-        const contentMap = data.reduce((acc: any, item: any) => {
+    async function fetchPageData() {
+      const [contentRes, companiesRes] = await Promise.all([
+        supabase.from('site_content').select('*'),
+        fetchTopCompanies()
+      ]);
+
+      if (contentRes.data) {
+        const contentMap = contentRes.data.reduce((acc: any, item: any) => {
           acc[item.id] = item.content;
           return acc;
         }, {});
         setContent(contentMap);
       }
+
+      if (companiesRes.success) {
+        setCompanies(companiesRes.data);
+      }
+
       setLoading(false);
     }
-    fetchContent();
+    fetchPageData();
   }, []);
 
   // Fallback defaults if content isn''t loaded yet
@@ -135,13 +146,28 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Trust Bar */}
+      {/* Trust Bar / Top Companies */}
       <section className="section py-8" style={{ background: 'var(--bg-section)' }}>
-        <div className="container flex-center" style={{ gap: '4rem', opacity: 0.9 }}>
+        <div className="container flex-center" style={{ gap: '4rem', opacity: 0.9, flexWrap: 'wrap' }}>
           <span style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '3px', color: 'var(--brand-gold)' }}>Global Dominance:</span>
-          <span style={{ color: 'var(--text-heading)', fontWeight: 900, fontSize: '0.95rem', letterSpacing: '2px' }}>FILIPINO HOMES</span>
-          <span style={{ color: 'var(--text-heading)', fontWeight: 900, fontSize: '0.95rem', letterSpacing: '2px' }}>LEUTERIO REALTY</span>
-          <span style={{ color: 'var(--text-heading)', fontWeight: 900, fontSize: '0.95rem', letterSpacing: '2px' }}>RENT.PH</span>
+          {companies.length > 0 ? (
+            companies.map((company) => (
+              <div key={company.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--text-heading)', fontWeight: 900, fontSize: '0.95rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
+                  {company.name}
+                </span>
+                {company.location && (
+                  <span style={{ fontSize: '0.7rem', color: 'var(--brand-gold)', opacity: 0.6 }}>({company.location})</span>
+                )}
+              </div>
+            ))
+          ) : (
+            <>
+              <span style={{ color: 'var(--text-heading)', fontWeight: 900, fontSize: '0.95rem', letterSpacing: '2px' }}>FILIPINO HOMES</span>
+              <span style={{ color: 'var(--text-heading)', fontWeight: 900, fontSize: '0.95rem', letterSpacing: '2px' }}>LEUTERIO REALTY</span>
+              <span style={{ color: 'var(--text-heading)', fontWeight: 900, fontSize: '0.95rem', letterSpacing: '2px' }}>RENT.PH</span>
+            </>
+          )}
         </div>
       </section>
 

@@ -71,3 +71,20 @@ export async function fetchAllContent(): Promise<CMSResult> {
 
   return { success: true, data };
 }
+
+/**
+ * Fetches top companies for the 'Trust Bar' / Ecosystem section
+ */
+export async function fetchTopCompanies(): Promise<CMSResult> {
+  const { data, error } = await supabase
+    .from("companies")
+    .select("*")
+    .eq("is_top", true)
+    .order("display_order", { ascending: true });
+
+  if (error) {
+    return { success: false, error: error.message };
+  }
+
+  return { success: true, data };
+}
