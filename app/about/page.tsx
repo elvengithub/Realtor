@@ -1,4 +1,4 @@
-import Biography from "@/src/pages/about/Biography";
+import Biography from "@/src/pages/legacy_pages/about/Biography";
 
 export const dynamic = 'force-dynamic';
 

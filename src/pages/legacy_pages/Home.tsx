@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Users, Globe, Trophy, Loader2, Pencil } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
-import { useAuth } from '../context/AuthContext';
-import { supabase } from '../lib/supabase';
+import { useTheme } from '@/src/context/ThemeContext';
+import { useAuth } from '@/src/context/AuthContext';
+import { supabase } from '@/src/lib/supabase';
 
 // Import assets
-import anthonyImg from '../assets/ton1.jpg';
-import tonDarkImg from '../assets/tondark1.jpg';
+import anthonyImg from '@/src/assets/ton1.jpg';
+import tonDarkImg from '@/src/assets/tondark1.jpg';
 
 const Home = () => {
   const { isDark } = useTheme();

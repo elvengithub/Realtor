@@ -1,4 +1,4 @@
-import Home from "@/src/pages/Home";
+import Home from "@/src/pages/legacy_pages/Home";
 
 export const dynamic = 'force-dynamic';
 

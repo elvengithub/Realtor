@@ -1,8 +1,8 @@
 "use client";
-import { useTheme } from '../../context/ThemeContext';
-import { useAuth } from '../../context/AuthContext';
-import anthonyDarkImg from '../../assets/tondark1.jpg';
-import anthonyLightImg from '../../assets/ton1.jpg';
+import { useTheme } from '@/src/context/ThemeContext';
+import { useAuth } from '@/src/context/AuthContext';
+import anthonyDarkImg from '@/src/assets/tondark1.jpg';
+import anthonyLightImg from '@/src/assets/ton1.jpg';
 import { Award, Globe, Zap, Pencil } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';

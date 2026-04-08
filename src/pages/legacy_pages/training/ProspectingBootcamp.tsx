@@ -1,5 +1,5 @@
 "use client";
-import MasterSalesPage from '../../components/MasterSalesPage';
+import MasterSalesPage from '@/src/components/MasterSalesPage';
 
 const ProspectingBootcamp = () => {
   return (
