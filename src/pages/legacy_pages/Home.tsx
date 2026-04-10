@@ -11,7 +11,7 @@ import InlineEditorModal from '@/src/components/admin/InlineEditorModal';
 
 // Explicit static paths for public/img/ assets
 const PATH_LIGHT_BODY = '/img/ton1.jpg';
-const PATH_LIGHT_HERO = '/img/ton.jpg';
+const PATH_LIGHT_HERO = '/img/ton1.jpg';
 const PATH_DARK = '/img/tondark1.jpg';
 
 const Home = () => {
@@ -103,19 +103,41 @@ const Home = () => {
       <section 
         id="hero" 
         key={`hero-bg-${isDark}`} 
-        className="hero" 
+        className="hero hero-global" 
         style={{ 
-          backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%), url("${currentHeroImg}")`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 5%',
-          minHeight: '100vh',
           display: 'flex',
-          alignItems: 'flex-start',
-          justifyContent: 'flex-start',
-          padding: '100px 8% 80px 12%',
-          position: 'relative'
+          position: 'relative',
+          overflow: 'hidden',
+          color: 'white',
+          padding: '0 8% 0 clamp(1.25rem, 6vw, 12%)',
+          minHeight: '90vh',
+          width: '100%'
         }}
       >
+        <Image
+          src={currentHeroImg}
+          alt="Anthony Leuterio Hero"
+          fill
+          priority
+          quality={100}
+          style={{ 
+            objectFit: 'cover', 
+            objectPosition: 'center 5%',
+            zIndex: 0
+          }}
+          sizes="100vw"
+        />
+        {/* Subtle Luxury Overlay - Adjusted for better image visibility */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)',
+          zIndex: 1
+        }} />
+
         {user && (
           <button 
             onClick={() => setActiveEditor('hero')}
@@ -125,15 +147,15 @@ const Home = () => {
             <Pencil size={20} />
           </button>
         )}
-        <div style={{ maxWidth: '600px', textAlign: 'left', position: 'relative', zIndex: 10 }}>
+        <div className="hero-content-wrapper" style={{ maxWidth: '650px', textAlign: 'left', position: 'relative', zIndex: 10 }}>
           <p style={{ color: '#D4AF37', fontSize: '0.9rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '0.5rem' }}>
             {hero.subtitle}
           </p>
-          <p style={{ color: '#FFFFFF', fontSize: '1.4rem', marginBottom: '1.5rem', fontWeight: 500, opacity: 0.9 }}>
+          <p style={{ color: '#FFFFFF', fontSize: '1.4rem', marginBottom: '1rem', fontWeight: 500, opacity: 0.9 }}>
             Transform Your Reality
           </p>
           <h1 style={{ 
-            marginBottom: '2rem', 
+            marginBottom: '1.5rem', 
             fontSize: 'clamp(2.5rem, 8vw, 4.8rem)', 
             color: '#FFFFFF', 
             letterSpacing: '-2px', 
@@ -148,11 +170,11 @@ const Home = () => {
               </React.Fragment>
             ))}
           </h1>
-          <p style={{ fontSize: '1.15rem', color: '#FFFFFF', maxWidth: '500px', marginBottom: '3.5rem', fontWeight: 400, lineHeight: 1.6, opacity: 0.95 }}>
+          <p style={{ fontSize: '1.1rem', color: '#FFFFFF', maxWidth: '500px', marginBottom: '2.5rem', fontWeight: 400, lineHeight: 1.6, opacity: 0.95 }}>
             {hero.description}
           </p>
           <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-            <Link href={hero.cta_link} className="btn" style={{ background: '#D4AF37', color: 'black', padding: '1rem 3.5rem', fontSize: '1.1rem', fontWeight: 800, textDecoration: 'none' }}>
+            <Link href={hero.cta_link} className="btn btn-primary" style={{ padding: '1rem 3.5rem' }}>
               {hero.cta_text}
             </Link>
           </div>
@@ -161,31 +183,32 @@ const Home = () => {
 
       {/* Trust Bar / Top Companies */}
       <section className="section py-12" style={{ background: isDark ? '#0a0a0a' : '#f8f8f8', borderBottom: `1px solid ${isDark ? '#1a1a1a' : '#eee'}` }}>
-        <div className="container" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '5rem', alignItems: 'center' }}>
+        <div className="container" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '3rem', alignItems: 'center' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '4px', color: '#D4AF37' }}>Strategic Ecosystem:</span>
-          {companies.length > 0 ? (
-            companies.map((company) => (
-              <div key={company.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span style={{ color: isDark ? '#ffffff' : '#000000', fontWeight: 900, fontSize: '1rem', letterSpacing: '3px', textTransform: 'uppercase', opacity: 0.8 }}>
-                  {company.name}
-                </span>
-                {company.location && (
-                  <span style={{ fontSize: '0.7rem', color: '#D4AF37', opacity: 0.6 }}>({company.location})</span>
-                )}
-              </div>
-            ))
-          ) : (
-            <>
-              <span style={{ color: isDark ? '#ffffff' : '#000000', fontWeight: 900, fontSize: '1rem', letterSpacing: '3px', opacity: 0.8 }}>FILIPINO HOMES</span>
-              <span style={{ color: isDark ? '#ffffff' : '#000000', fontWeight: 900, fontSize: '1rem', letterSpacing: '3px', opacity: 0.8 }}>LEUTERIO REALTY</span>
-              <span style={{ color: isDark ? '#ffffff' : '#000000', fontWeight: 900, fontSize: '1rem', letterSpacing: '3px', opacity: 0.8 }}>RENT.PH</span>
-            </>
-          )}
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '2.5rem 5rem' }}>
+            {companies.length > 0 ? (
+              companies.map((company) => (
+                <div key={company.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ color: isDark ? '#ffffff' : '#000000', fontWeight: 900, fontSize: '1rem', letterSpacing: '3px', textTransform: 'uppercase', opacity: 0.8 }}>
+                    {company.name}
+                  </span>
+                  {company.location && (
+                    <span style={{ fontSize: '0.7rem', color: '#D4AF37', opacity: 0.6 }}>({company.location})</span>
+                  )}
+                </div>
+              ))
+            ) : (
+              <>
+                <span style={{ color: isDark ? '#ffffff' : '#000000', fontWeight: 900, fontSize: '1rem', letterSpacing: '3px', opacity: 0.8 }}>FILIPINO HOMES</span>
+                <span style={{ color: isDark ? '#ffffff' : '#000000', fontWeight: 900, fontSize: '1rem', letterSpacing: '3px', opacity: 0.8 }}>LEUTERIO REALTY</span>
+                <span style={{ color: isDark ? '#ffffff' : '#000000', fontWeight: 900, fontSize: '1rem', letterSpacing: '3px', opacity: 0.8 }}>RENT.PH</span>
+              </>
+            )}
+          </div>
         </div>
       </section>
-
       {/* Brand Introduction */}
-      <section className="section" style={{ position: 'relative', background: isDark ? '#000000' : '#ffffff', padding: '10rem 0' }}>
+      <section className="section" style={{ position: 'relative', background: isDark ? '#000000' : '#ffffff' }}>
         {user && (
           <button 
             onClick={() => setActiveEditor('intro')}
@@ -196,10 +219,10 @@ const Home = () => {
           </button>
         )}
         <div className="container">
-          <div className="grid-2" style={{ gap: '8rem', alignItems: 'center' }}>
+          <div className="grid-2 responsive-gap" style={{ alignItems: 'center' }}>
             <div className="reveal active">
               <span style={{ color: '#D4AF37', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '3px', fontSize: '0.9rem', marginBottom: '1.5rem', display: 'block' }}>The Visionary</span>
-              <h2 className="section-title" style={{ marginBottom: '2.5rem', fontSize: '3.5rem', color: isDark ? '#ffffff' : '#000000', lineHeight: 1.1 }}>
+              <h2 className="section-title" style={{ marginBottom: '2.5rem', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: isDark ? '#ffffff' : '#000000', lineHeight: 1.1 }}>
                 {(intro.title || "").split('<br />').map((text: string, i: number) => (
                   <React.Fragment key={i}>
                     {text}
@@ -208,7 +231,7 @@ const Home = () => {
                 ))}
               </h2>
               <p style={{ fontSize: '1.2rem', fontWeight: 600, color: '#D4AF37', marginBottom: '2rem' }}>{intro.subtitle}</p>
-              <p style={{ marginBottom: '2.5rem', fontSize: '1.1rem', lineHeight: 1.8, color: isDark ? '#cccccc' : '#444444' }}>
+              <p style={{ marginBottom: '2.5rem', fontSize: '1.1rem', lineHeight: 1.8, color: isDark ? '#ffffff' : '#444444' }}>
                 {intro.bio}
               </p>
               <div style={{ borderLeft: `3px solid #D4AF37`, paddingLeft: '2rem', margin: '3rem 0', fontStyle: 'italic' }}>
@@ -216,7 +239,7 @@ const Home = () => {
                   "{intro.quote}"
                 </p>
               </div>
-              <Link href="/about" className="btn" style={{ padding: '1rem 2.5rem', background: 'transparent', border: `2px solid ${isDark ? '#D4AF37' : '#000000'}`, color: isDark ? '#ffffff' : '#000000', fontWeight: 700, textDecoration: 'none' }}>Read Biography</Link>
+              <Link href="/about" className="btn btn-outline" style={{ padding: '1rem 2.5rem' }}>Read Biography</Link>
             </div>
             <div className="reveal active">
               <div style={{ position: 'relative' }}>
@@ -252,7 +275,7 @@ const Home = () => {
         {user && (
           <button 
             onClick={() => setActiveEditor('ecosystem')}
-            style={{ position: 'absolute', top: '100px', right: '2rem', zIndex: 100, background: '#D4AF37', color: 'white', padding: '0.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', cursor: 'pointer', border: 'none' }}
+            style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 100, background: '#D4AF37', color: 'white', padding: '0.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', cursor: 'pointer', border: 'none' }}
             title="Edit Ecosystem Content"
           >
             <Pencil size={20} />
@@ -266,22 +289,22 @@ const Home = () => {
               Anthony Leuterio's coaching is fueled by the largest real estate infrastructure in the Philippines.
             </p>
           </div>
-          <div className="grid-3" style={{ marginTop: '4rem' }}>
-            <div className="card" style={{ padding: '3rem' }}>
+          <div className="grid-3 responsive-gap" style={{ marginTop: '4rem' }}>
+            <div className="card" style={{ padding: 'clamp(1.5rem, 4vw, 3rem)' }}>
               <h3 style={{ color: 'var(--brand-orange)', marginBottom: '1rem' }}>{ecosystem.filipino_homes?.title || "Filipino Homes"}</h3>
               <p className="mb-4">{ecosystem.filipino_homes?.description}</p>
               <div style={{ padding: '1rem 0' }}>
                 <span style={{ fontWeight: 800, color: 'var(--brand-blue)' }}>{ecosystem.filipino_homes?.stat}</span>
               </div>
             </div>
-            <div className="card" style={{ padding: '3rem' }}>
+            <div className="card" style={{ padding: 'clamp(1.5rem, 4vw, 3rem)' }}>
               <h3 style={{ color: 'var(--brand-orange)', marginBottom: '1rem' }}>{ecosystem.leuterio_realty?.title || "Leuterio Realty"}</h3>
               <p className="mb-4">{ecosystem.leuterio_realty?.description}</p>
               <div style={{ padding: '1rem 0' }}>
                 <span style={{ fontWeight: 800, color: 'var(--brand-blue)' }}>{ecosystem.leuterio_realty?.stat}</span>
               </div>
             </div>
-            <div className="card" style={{ padding: '3rem' }}>
+            <div className="card" style={{ padding: 'clamp(1.5rem, 4vw, 3rem)' }}>
               <h3 style={{ color: 'var(--brand-orange)', marginBottom: '1rem' }}>{ecosystem.rent_ph?.title || "Rent.ph"}</h3>
               <p className="mb-4">{ecosystem.rent_ph?.description}</p>
               <div style={{ padding: '1rem 0' }}>
@@ -297,23 +320,23 @@ const Home = () => {
         <div className="container">
           <div className="text-center mb-4">
             <h2 className="section-title">The <span style={{ color: '#D4AF37' }}>Masterclasses</span></h2>
-            <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.15rem', opacity: 0.7, lineHeight: 1.8 }}>Refined strategies built for those who refuse to settle for the status quo. Our programs are engineered to deliver measurable ROI and transformative leadership.</p>
+            <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--text-main)', opacity: isDark ? 1 : 0.7 }}>Refined strategies built for those who refuse to settle for the status quo. Our programs are engineered to deliver measurable ROI and transformative leadership.</p>
           </div>
           <div className="grid-3">
-            <div className="card text-center" style={{ padding: '3rem 2rem' }}>
-              <Trophy size={48} color="var(--secondary-color)" style={{ marginBottom: '1.5rem' }} />
+            <div className="card text-center" style={{ padding: 'clamp(2rem, 5vw, 3rem) 2rem' }}>
+              <Trophy size={48} color="var(--brand-gold)" style={{ marginBottom: '1.5rem' }} />
               <h3>Coaching Core</h3>
               <p>Foundational group coaching for agents wanting to build a sustainable business.</p>
               <Link href="/coaching/core" className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Learn More</Link>
             </div>
-            <div className="card text-center" style={{ padding: '3rem 2rem' }}>
-              <Users size={48} color="var(--secondary-color)" style={{ marginBottom: '1.5rem' }} />
+            <div className="card text-center" style={{ padding: 'clamp(2rem, 5vw, 3rem) 2rem' }}>
+              <Users size={48} color="var(--brand-gold)" style={{ marginBottom: '1.5rem' }} />
               <h3>Our Programs</h3>
               <p>Explore our wide range of coaching services tailored to your specific needs.</p>
               <Link href="/coaching/programs" className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Explore All</Link>
             </div>
-            <div className="card text-center" style={{ padding: '3rem 2rem' }}>
-              <Globe size={48} color="var(--secondary-color)" style={{ marginBottom: '1.5rem' }} />
+            <div className="card text-center" style={{ padding: 'clamp(2rem, 5vw, 3rem) 2rem' }}>
+              <Globe size={48} color="var(--brand-gold)" style={{ marginBottom: '1.5rem' }} />
               <h3>Our Coaches</h3>
               <p>Meet the elite strategists certified by Anthony Leuterio.</p>
               <Link href="/coaches" className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Meet the Team</Link>
@@ -325,7 +348,7 @@ const Home = () => {
       {/* Training Overview */}
       <section className="section bg-alt">
         <div className="container">
-          <div className="grid-2">
+          <div className="grid-2 responsive-gap">
             <div>
               <h2 className="section-title" style={{ marginBottom: '2rem' }}>Accelerate Your <span style={{ color: '#D4AF37' }}>Growth</span></h2>
               <p className="mb-2">Our training programs are built on real-world experience and proven systems that drive results in today's competitive market.</p>
@@ -366,7 +389,7 @@ const Home = () => {
           </button>
         )}
         <div className="container">
-          <div className="grid-2" style={{ alignItems: 'center', gap: '4rem' }}>
+          <div className="grid-2 responsive-gap" style={{ alignItems: 'center' }}>
             <div className="reveal active">
               <span className="roi-badge mb-4">{event.badge}</span>
               <h2 className="section-title" style={{ marginBottom: '1.5rem', color: '#D4AF37' }}>
@@ -383,7 +406,7 @@ const Home = () => {
               <p className="mb-4" style={{ fontSize: '1.1rem', opacity: 0.8 }}>
                 {event.description}
               </p>
-              <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+              <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
                 <Link href={event.cta_link} className="btn btn-primary">{event.cta_text}</Link>
                 <span style={{ fontSize: '0.9rem', fontWeight: 700, color: '#D4AF37', textTransform: 'uppercase', letterSpacing: '1px' }}>{event.availability}</span>      
               </div>
@@ -431,7 +454,7 @@ const Home = () => {
                 <h4 className="org">Blog</h4>
                 <h3>The Future of Digital Real Estate</h3>
                 <p>How AI and online platforms are reshaping the archipelago's market.</p>
-                <Link href="/blog" style={{ color: 'var(--secondary-color)', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '1.5rem' }}>Read Article</Link>   
+                <Link href="/blog" style={{ color: 'var(--brand-gold)', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '1.5rem' }}>Read Article</Link>   
               </div>
             </div>
             <div className="card" style={{ padding: '0', overflow: 'hidden' }}>
@@ -440,7 +463,7 @@ const Home = () => {
                 <h4 className="org">Strategy</h4>
                 <h3>5 Mistakes in Digital Marketing</h3>
                 <p>Avoid these common errors that kill your conversion rates.</p>
-                <Link href="/blog" style={{ color: 'var(--secondary-color)', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '1.5rem' }}>Read More</Link>      
+                <Link href="/blog" style={{ color: 'var(--brand-gold)', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '1.5rem' }}>Read More</Link>      
               </div>
             </div>
             <div className="card" style={{ padding: '0', overflow: 'hidden' }}>
@@ -449,7 +472,7 @@ const Home = () => {
                 <h4 className="org">Tech</h4>
                 <h3>How AI is Changing Real Estate</h3>
                 <p>Explore the frontier of AI-driven property marketing.</p>
-                <Link href="/blog" style={{ color: 'var(--secondary-color)', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '1.5rem' }}>Read More</Link>      
+                <Link href="/blog" style={{ color: 'var(--brand-gold)', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '1.5rem' }}>Read More</Link>      
               </div>
             </div>
           </div>
@@ -463,8 +486,8 @@ const Home = () => {
             <span className="subtitle">Success Stories</span>
             <h2>Real Results from Real Leaders</h2>
           </div>
-          <div className="grid-2">
-            <div className="card" style={{ padding: '4rem', display: 'flex', flexDirection: 'column' }}>
+          <div className="grid-2 responsive-gap">
+            <div className="card responsive-padding" style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '2.5rem' }}>
                 <div style={{ position: 'relative', width: '80px', height: '80px' }}>
                   <Image 
@@ -484,7 +507,7 @@ const Home = () => {
                 "Anthony's coaching completely changed my perspective on leadership. I went from struggling with operations to scaling my business globally using his strategic systems. Our revenue increased by 400% in just one year."
               </p>
             </div>
-            <div className="card" style={{ padding: '4rem', display: 'flex', flexDirection: 'column' }}>
+            <div className="card responsive-padding" style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '2.5rem' }}>
                 <div style={{ position: 'relative', width: '80px', height: '80px' }}>
                   <Image 
@@ -523,9 +546,9 @@ const Home = () => {
       {/* Consultation CTA */}
       <section className="section" style={{ background: 'var(--bg-section)', color: 'var(--text-main)' }}>
         <div className="container text-center">
-          <h2 className="section-title" style={{ fontSize: '3rem', color: 'var(--text-heading)' }}>Ready to Take Command?</h2>
-          <p className="mb-4" style={{ fontSize: '1.4rem', opacity: 0.9, maxWidth: '850px', margin: '0 auto 4rem', fontWeight: 500, color: 'var(--text-main)' }}>The window to redefine your future is narrowing. Secure your strategy session today.</p>
-          <a href="mailto:consultation@tonleuterio.com" className="btn btn-primary" style={{ padding: '1.8rem 5rem', fontSize: '1.2rem' }}>Inquire for Consultation</a>
+          <h2 className="section-title" style={{ fontSize: 'clamp(2rem, 8vw, 3rem)', color: 'var(--text-heading)' }}>Ready to Take Command?</h2>
+          <p className="mb-4" style={{ fontSize: '1.2rem', opacity: 0.9, maxWidth: '850px', margin: '0 auto 4rem', fontWeight: 500, color: 'var(--text-main)' }}>The window to redefine your future is narrowing. Secure your strategy session today.</p>
+          <a href="mailto:consultation@tonleuterio.com" className="btn btn-primary" style={{ padding: '1.5rem 4rem', fontSize: '1.1rem' }}>Inquire for Consultation</a>
         </div>
       </section>
 

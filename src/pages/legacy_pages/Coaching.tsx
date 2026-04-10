@@ -61,7 +61,7 @@ const Coaching = () => {
   return (
     <div className="coaching-page">
       {/* Premium Hero Section */}
-      <section className="section pb-20" style={{ position: 'relative', background: isDark ? '#050505' : '#111', color: '#fff', minHeight: '60vh', display: 'flex', alignItems: 'center' }}>
+      <section className="hero-global" style={{ position: 'relative', background: isDark ? '#050505' : '#111', color: '#fff', display: 'flex', alignItems: 'center' }}>
         {/* Background Gradients */}
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'radial-gradient(circle at center, rgba(212, 175, 55, 0.15) 0%, transparent 60%)', pointerEvents: 'none' }}></div>
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '100px', background: isDark ? 'linear-gradient(to top, rgba(0,0,0,1), transparent)' : 'linear-gradient(to top, var(--bg-light), transparent)', pointerEvents: 'none', zIndex: 1 }}></div>
@@ -80,7 +80,7 @@ const Coaching = () => {
           <h1 className="section-title text-gold" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', color: '#fff' }}>
             {heroContent.title}
           </h1>
-          <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', color: '#ccc', lineHeight: 1.6 }}>
+          <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6 }}>
             {heroContent.description}
           </p>
         </div>

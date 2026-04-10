@@ -25,10 +25,10 @@ const OurCoaches = () => {
 
   return (
     <div className="coaches-page">
-      <section className="section bg-light" style={{ paddingTop: '7rem' }}>
+      <section className="hero-global bg-light">
         <div className="container text-center">
-          <span className="subtitle" style={{ color: 'var(--accent-text)' }}>THE EXPERTS</span>
-          <h1 style={{ marginBottom: '2.5rem', fontSize: 'clamp(2.5rem, 8vw, 4rem)' }}>The Senior <br />Strategists</h1>
+          <span className="subtitle" style={{ color: 'var(--brand-gold)' }}>THE EXPERTS</span>
+          <h1 style={{ marginBottom: '1.5rem', fontSize: 'clamp(2.5rem, 8vw, 4rem)' }}>The Senior <br />Strategists</h1>
           <p style={{ maxWidth: '700px', margin: '0 auto', fontSize: '1.1rem' }}>
             Hand-picked and certified by Anthony Leuterio, our coaches are veterans who have "been there and done that."
           </p>
@@ -39,13 +39,13 @@ const OurCoaches = () => {
         <div className="container">
           <div className="grid-3">
             {coaches.map((c, idx) => (
-              <div key={idx} className="card" style={{ padding: '0', overflow: 'hidden' }}>
-                <div style={{ height: '300px', backgroundImage: `url(${c.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-                <div style={{ padding: '2.5rem' }}>
+              <div key={idx} className="card" style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ height: '300px', backgroundImage: `url(${c.image})`, backgroundSize: 'cover', backgroundPosition: 'center', flexShrink: 0 }}></div>
+                <div style={{ padding: '2.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                   <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', fontWeight: 800 }}>{c.name}</h3>
-                  <span className="subtitle" style={{ fontSize: '0.7rem', color: 'var(--accent-text)', marginBottom: '1.5rem', fontWeight: 700 }}>{c.role}</span>
-                  <p style={{ fontSize: '1rem', marginBottom: '2.5rem', opacity: 0.8, lineHeight: 1.7 }}>{c.bio}</p>
-                  <a href="#" style={{ color: 'var(--primary-color)', display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontWeight: 700, fontSize: '0.85rem' }}>
+                  <span className="subtitle" style={{ fontSize: '0.7rem', color: 'var(--brand-gold)', marginBottom: '1.5rem', fontWeight: 700 }}>{c.role}</span>
+                  <p style={{ fontSize: '1rem', marginBottom: '2.5rem', opacity: 0.8, lineHeight: 1.7, flex: 1 }}>{c.bio}</p>
+                  <a href="#" style={{ color: 'var(--brand-gold)', display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontWeight: 700, fontSize: '0.85rem', marginTop: 'auto' }}>
                     <Linkedin size={18} /> CONNECT ON LINKEDIN
                   </a>
                 </div>

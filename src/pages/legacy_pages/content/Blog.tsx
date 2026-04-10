@@ -36,25 +36,84 @@ const Blog = () => {
   ];
 
   return (
-    <div className="content-hub">
-      {/* Magazine Hero */}
-      <section className="section bg-alt" style={{ paddingTop: '7rem' }}>
-        <div className="container">
-          <div className="section-title text-center">
-            <span className="subtitle">The Archipelago Insight</span>
-            <h1 style={{ fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-1px' }}>Knowledge for Global Leaders</h1>
+    <div className="content-hub min-h-screen" style={{ background: 'var(--bg-primary)' }}>
+      {/* Cinematic Hero Entrance - Standardized with Properties */}
+      <section className="relative w-full flex flex-col items-center justify-center overflow-hidden" style={{ 
+        height: '40vh', 
+        minHeight: '450px', 
+        background: '#000000',
+        borderBottom: '1px solid rgba(212,175,55,0.3)'
+      }}>
+        
+        {/* Luxury Lighting Effects */}
+        <div className="absolute inset-0 z-0 opacity-30" style={{ 
+          background: 'radial-gradient(circle at 50% 50%, #D4AF37 0%, transparent 70%)',
+          filter: 'blur(80px)'
+        }}></div>
+        <div className="absolute top-0 left-0 w-full h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}></div>
+        
+        {/* Subtle Pattern Overlay */}
+        <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ 
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+
+        <div className="relative z-10 text-center px-4 w-full max-w-5xl flex flex-col items-center justify-center">
+          <div className="mb-8">
+             <div className="h-[1px] w-16 bg-[#D4AF37] mx-auto mb-6"></div>
+             <span style={{ 
+               letterSpacing: '0.6em', 
+               color: '#D4AF37', 
+               fontWeight: 700, 
+               fontSize: '0.75rem', 
+               textTransform: 'uppercase',
+               display: 'block'
+             }}>
+               The Archipelago Insight
+             </span>
           </div>
           
-          {/* Featured Post */}
-          <div className="card" style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column', marginTop: '3rem' }}>
+          <h1 style={{ 
+            fontSize: 'clamp(3.5rem, 8vw, 6rem)', 
+            fontWeight: 800, 
+            letterSpacing: '0.15em', 
+            textTransform: 'uppercase', 
+            marginBottom: '2rem',
+            lineHeight: 0.85,
+            color: '#D4AF37',
+            fontFamily: 'var(--font-outfit)',
+            textShadow: '0 10px 40px rgba(0,0,0,0.8)'
+          }}>
+            STRATEGIC<br/><span style={{ fontWeight: 200, letterSpacing: '0.25em' }}>INSIGHTS</span>
+          </h1>
+          
+          <p style={{ 
+            fontSize: '1.25rem', 
+            color: '#FFFFFF',
+            maxWidth: '800px', 
+            margin: '0 auto',
+            letterSpacing: '0.1em',
+            fontWeight: 300,
+            fontFamily: 'var(--font-outfit)',
+            opacity: 0.8,
+            lineHeight: 1.8
+          }}>
+            High-performance knowledge and data engineered for the world's most discerning leaders.
+          </p>
+        </div>
+      </section>
+
+      {/* Featured Post Section */}
+      <section className="section bg-alt" style={{ padding: '5rem 0' }}>
+        <div className="container">
+          <div className="card" style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 10 }}>
             <div className="grid-2" style={{ gap: '0' }}>
-              <div style={{ padding: '4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div className="responsive-padding" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <span className="subtitle" style={{ fontSize: '0.8rem' }}>Featured Article</span>
-                <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>The Evolution of "Coaching with Heart"</h2>
-                <p className="mb-4">
+                <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', marginBottom: '1.5rem', color: 'var(--text-heading)' }}>The Evolution of "Coaching with Heart"</h2>
+                <p className="mb-4" style={{ color: 'var(--text-main)', lineHeight: 1.8 }}>
                   Leadership isn't about metrics; it's about the lives we impact. Anthony Leuterio shares his journey of building the largest network in the Philippines through empathy and innovation.
                 </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '2.5rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '2.5rem', color: 'var(--text-muted)', fontSize: '0.9rem', flexWrap: 'wrap' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <Calendar size={16} /> May 15, 2024
                   </span>
@@ -83,27 +142,34 @@ const Blog = () => {
             display: 'flex', 
             justifyContent: 'space-between', 
             alignItems: 'center', 
-            marginBottom: '4rem',
+            marginBottom: '5rem',
             flexWrap: 'wrap',
-            gap: '2rem'
+            gap: '2.5rem'
           }}>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               {categories.map(cat => (
                 <button 
                   key={cat} 
                   className={`btn ${cat === 'All' ? 'btn-primary' : 'btn-outline'}`}
-                  style={{ padding: '0.5rem 1.5rem', fontSize: '0.75rem' }}
+                  style={{ padding: '0.7rem 1.8rem', fontSize: '0.75rem', letterSpacing: '0.1em' }}
                 >
                   {cat}
                 </button>
               ))}
             </div>
-            <div style={{ position: 'relative', maxWidth: '300px', width: '100%' }}>
+            <div style={{ position: 'relative', maxWidth: '350px', width: '100%' }}>
               <input 
                 type="text" 
                 placeholder="Search insights..." 
                 className="form-control"
-                style={{ paddingLeft: '3rem', borderRadius: '0', borderColor: 'var(--brand-gold)' }}
+                style={{ 
+                  padding: '1rem 1rem 1rem 3.5rem', 
+                  borderRadius: '8px', 
+                  borderColor: 'var(--border-color)',
+                  background: 'var(--bg-card)',
+                  color: 'var(--text-main)',
+                  width: '100%'
+                }}
               />
               <Search size={18} style={{ position: 'absolute', left: '1.2rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--brand-gold)' }} />
             </div>
@@ -112,17 +178,17 @@ const Blog = () => {
           {/* Content Grid */}
           <div className="grid-3">
             {posts.map(post => (
-              <div key={post.id} className="card" style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+              <div key={post.id} className="card" style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <div style={{ 
-                  height: '240px', 
+                  height: '260px', 
                   backgroundImage: `url(${post.image})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center'
                 }}></div>
                 <div style={{ padding: '2.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  <span className="subtitle" style={{ fontSize: '0.7rem', marginBottom: '0.8rem', color: 'var(--brand-gold)' }}>{post.category}</span>
-                  <h3 style={{ fontSize: '1.4rem', marginBottom: '1.2rem', lineHeight: 1.4 }}>{post.title}</h3>
-                  <p style={{ fontSize: '0.95rem', marginBottom: '2rem', flex: 1 }}>{post.excerpt}</p>
+                  <span className="subtitle" style={{ fontSize: '0.7rem', marginBottom: '1rem', color: 'var(--brand-gold)' }}>{post.category}</span>
+                  <h3 style={{ fontSize: '1.5rem', marginBottom: '1.2rem', lineHeight: 1.3, color: 'var(--text-heading)' }}>{post.title}</h3>
+                  <p style={{ fontSize: '1rem', marginBottom: '2.5rem', flex: 1, color: 'var(--text-main)', lineHeight: 1.6 }}>{post.excerpt}</p>
                   <Link 
                     href="#" 
                     style={{ 
@@ -131,13 +197,14 @@ const Blog = () => {
                       textDecoration: 'none', 
                       display: 'flex', 
                       alignItems: 'center', 
-                      gap: '0.5rem',
-                      fontSize: '0.9rem',
+                      gap: '0.6rem',
+                      fontSize: '0.85rem',
                       textTransform: 'uppercase',
-                      letterSpacing: '1px'
+                      letterSpacing: '0.15em',
+                      marginTop: 'auto'
                     }}
                   >
-                    Read More <ArrowRight size={16} />
+                    Read More <ArrowRight size={18} />
                   </Link>
                 </div>
               </div>
@@ -145,8 +212,8 @@ const Blog = () => {
           </div>
           
           {/* Pagination Hint */}
-          <div className="text-center" style={{ marginTop: '6rem' }}>
-            <button className="btn btn-outline" style={{ padding: '1rem 4rem' }}>Load More Insights</button>
+          <div className="text-center" style={{ marginTop: '8rem' }}>
+            <button className="btn btn-outline" style={{ padding: '1.2rem 4.5rem', borderRadius: '8px' }}>Load More Insights</button>
           </div>
         </div>
       </section>

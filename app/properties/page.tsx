@@ -18,7 +18,6 @@ export default function PropertiesPage() {
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const [heroImage, setHeroImage] = useState("/img/ton2.avif"); // Default cinematic background
   const filters = ["All", "Residential", "Commercial", "Land", "Industrial"];
 
   const fetchProperties = async () => {
@@ -43,67 +42,94 @@ export default function PropertiesPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[var(--bg-base)]">
-        <Loader2 className="w-12 h-12 animate-spin" style={{ color: 'var(--brand-gold)' }} />
+        <Loader2 className="w-12 h-12 animate-spin" style={{ color: '#D4AF37' }} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pb-24" style={{ background: isDark ? '#020202' : '#f4f2ec' }}>
-      {/* 1. Cinematic Hero Entrance */}
-      <section className="relative w-full flex items-center justify-center overflow-hidden" style={{ height: '60vh', minHeight: '500px' }}>
-        <Image 
-          src={heroImage}
-          alt="Luxury Real Estate Portfolio" 
-          fill 
-          priority
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-          className="absolute inset-0 z-0"
-        />
-        {/* Gradients to merge image flawlessly into the background */}
-        <div className="absolute inset-0 z-1" style={{ background: isDark ? 'linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(2,2,2,1))' : 'linear-gradient(to bottom, rgba(0,0,0,0.5), #f4f2ec)' }}></div>
-        <div className="absolute inset-0 z-1" style={{ background: 'radial-gradient(circle at center, rgba(212,175,55,0.1), transparent 60%)' }}></div>
+    <div className="min-h-screen pb-24" style={{ background: isDark ? '#050505' : '#FAF9F6' }}>
+      {/* 1. Cinematic Hero Entrance - ULTRA LUXURY DUBAI GOLD & BLACK */}
+      <section className="relative w-full flex flex-col items-center justify-center overflow-hidden" style={{ 
+        height: '40vh', 
+        minHeight: '450px', 
+        background: '#000000', // Solid deep black for the Dubai theme
+        borderBottom: '1px solid rgba(212,175,55,0.3)'
+      }}>
+        
+        {/* Luxury Lighting Effects */}
+        <div className="absolute inset-0 z-0 opacity-30" style={{ 
+          background: 'radial-gradient(circle at 50% 50%, #D4AF37 0%, transparent 70%)',
+          filter: 'blur(80px)'
+        }}></div>
+        <div className="absolute top-0 left-0 w-full h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}></div>
+        
+        {/* Subtle Pattern Overlay */}
+        <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ 
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
 
-        <div className="relative z-10 text-center px-4 w-full max-w-4xl">
-          <span className="roi-badge mb-6 shimmer-gold" style={{ letterSpacing: '0.3em' }}>Exclusive Portfolio</span>
-          <h1 className="text-gold" style={{ 
-            fontSize: 'clamp(3rem, 6vw, 5rem)', 
+        <div className="relative z-10 text-center px-4 w-full max-w-5xl flex flex-col items-center justify-center">
+          <div className="mb-8">
+             <div className="h-[1px] w-16 bg-[#D4AF37] mx-auto mb-6"></div>
+             <span style={{ 
+               letterSpacing: '0.6em', 
+               color: '#D4AF37', 
+               fontWeight: 700, 
+               fontSize: '0.75rem', 
+               textTransform: 'uppercase',
+               display: 'block'
+             }}>
+               The Gold Collection
+             </span>
+          </div>
+          
+          <h1 style={{ 
+            fontSize: 'clamp(3.5rem, 10vw, 7rem)', 
             fontWeight: 800, 
-            letterSpacing: '0.05em', 
+            letterSpacing: '0.15em', 
             textTransform: 'uppercase', 
-            marginBottom: '1rem',
-            lineHeight: 1
+            marginBottom: '2rem',
+            lineHeight: 0.85,
+            color: '#D4AF37',
+            fontFamily: 'var(--font-outfit)',
+            textShadow: '0 10px 40px rgba(0,0,0,0.8)'
           }}>
-            ELITE ESTATES
+            ELITE<br/><span style={{ fontWeight: 200, letterSpacing: '0.25em' }}>ESTATES</span>
           </h1>
+          
           <p style={{ 
             fontSize: '1.25rem', 
-            color: isDark ? '#d4d4d4' : '#444', // Darkened the text in light mode for proper contrast
-            maxWidth: '600px', 
+            color: '#FFFFFF',
+            maxWidth: '650px', 
             margin: '0 auto',
-            letterSpacing: '0.02em',
-            fontWeight: 500
+            letterSpacing: '0.1em',
+            fontWeight: 300,
+            fontFamily: 'var(--font-outfit)',
+            opacity: 0.8,
+            lineHeight: 1.8
           }}>
-            Explore our highly curated collection of premium real estate opportunities engineered for the extraordinary.
+            High-performance real estate assets engineered for the world's most discerning investors.
           </p>
         </div>
       </section>
 
-      <div className="container relative z-20" style={{ marginTop: '-4rem' }}>
+      <div className="container relative z-20 mt-20">
         {/* 5. Lifestyle Filter Chips */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-16">
           {filters.map(filter => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className="px-6 py-2 rounded-full font-bold uppercase transition-all duration-300"
+              className="px-10 py-2.5 rounded-full font-bold uppercase transition-all duration-500"
               style={{
-                fontSize: '0.8rem',
-                letterSpacing: '0.1em',
-                background: activeFilter === filter ? 'var(--brand-gold)' : (isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'),
-                color: activeFilter === filter ? '#000' : 'var(--text-main)',
-                border: `1px solid ${activeFilter === filter ? 'var(--brand-gold)' : 'var(--border-color)'}`,
-                backdropFilter: 'blur(10px)'
+                fontSize: '0.7rem',
+                letterSpacing: '0.2em',
+                fontFamily: 'var(--font-outfit)',
+                background: activeFilter === filter ? '#D4AF37' : 'transparent',
+                color: activeFilter === filter ? '#000' : (isDark ? '#FFFFFF' : '#222'),
+                border: `1px solid ${activeFilter === filter ? '#D4AF37' : (isDark ? 'rgba(212,175,55,0.2)' : 'rgba(0,0,0,0.1)')}`,
+                boxShadow: activeFilter === filter ? '0 8px 25px rgba(212,175,55,0.2)' : 'none'
               }}
             >
               {filter}

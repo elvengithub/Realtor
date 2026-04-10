@@ -32,10 +32,10 @@ const OurPrograms = () => {
 
   return (
     <div className="programs-page">
-      <section className="section bg-light" style={{ paddingTop: '7rem' }}>
+      <section className="hero-global bg-light">
         <div className="container text-center">
           <span className="subtitle">Choose Your Path</span>
-          <h1 style={{ marginBottom: '2rem' }}>Coaching & Training <br />Programs</h1>
+          <h1 style={{ marginBottom: '1.5rem' }}>Coaching & Training <br />Programs</h1>
           <p style={{ maxWidth: '700px', margin: '0 auto', fontSize: '1.1rem' }}>
             From foundational skills to elite-level mastery, find the program that matches your ambition.
           </p>

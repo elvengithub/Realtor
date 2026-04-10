@@ -23,16 +23,16 @@ const Biography = () => {
         </Link>
       )}
       {/* Executive Narrative Hero */}
-      <section className="section" style={{ paddingTop: '7rem', background: 'var(--bg-section)' }}>
+      <section className="hero-global" style={{ background: 'var(--bg-section)' }}>
         <div className="container">
-          <div className="grid-2" style={{ alignItems: 'center', gap: '5rem' }}>
+          <div className="grid-2 responsive-gap" style={{ alignItems: 'center' }}>
             <div className="reveal active">
               <div className="roi-badge mb-4">2024 International Realtor of the Year</div>
-              <h1 style={{ marginBottom: '2rem', fontSize: 'clamp(2.5rem, 8vw, 4.5rem)', color: 'var(--text-heading)', letterSpacing: '2px' }}>The Narrative of <br /><span style={{ color: 'var(--brand-gold)' }}>Global Dominance</span></h1>
-              <p className="lead" style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '2.5rem', fontWeight: 500 }}>
+              <h1 style={{ marginBottom: '1.5rem', fontSize: 'clamp(2.5rem, 8vw, 4.5rem)', color: 'var(--text-heading)', letterSpacing: '2px' }}>The Narrative of <br /><span style={{ color: 'var(--brand-gold)' }}>Global Dominance</span></h1>
+              <p className="lead" style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '1.5rem', fontWeight: 500 }}>
                 Anthony Leuterio is the visionary founder of <strong>Filipino Homes</strong>, the largest comprehensive real estate ecosystem in the Philippines.
               </p>
-              <p className="mb-4" style={{ fontSize: '1.05rem', opacity: 0.8, lineHeight: 1.8, color: 'var(--text-main)' }}>
+              <p className="mb-4 hide-mobile" style={{ fontSize: '1.05rem', opacity: 0.8, lineHeight: 1.8, color: 'var(--text-main)' }}>
                 A computer science graduate from the University of San Jose - Recoletos, Anthony revolutionized the industry by merging technology with traditional real estate. Leading over 14,000 agents across 100+ offices, he has been instrumental in professionalizing the sector through <strong>Leuterio Realty & Brokerage</strong> and <strong>Rent.ph</strong>.
               </p>
             </div>
@@ -63,7 +63,8 @@ const Biography = () => {
                   width: '100%', 
                   height: '100%', 
                   borderRadius: 'var(--border-radius)',
-                  opacity: 0.5,
+                  background: 'var(--brand-gold)',
+                  opacity: 0.2,
                   zIndex: 1
                 }}></div>
               </div>
@@ -76,7 +77,7 @@ const Biography = () => {
       <section className="section text-center" style={{ backgroundColor: 'var(--bg-section)', color: 'var(--text-heading)' }}>
         <div className="container">
           <blockquote className="quote-block" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', borderLeft: 'none', display: 'block' }}>
-            <h2 style={{ fontStyle: 'italic', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', lineHeight: 1.2, color: 'var(--text-heading)', fontWeight: 700, textTransform: 'none' }}>
+            <h2 style={{ fontStyle: 'italic', fontSize: 'clamp(1.5rem, 4vw, 2.8rem)', lineHeight: 1.2, color: 'var(--text-heading)', fontWeight: 700, textTransform: 'none' }}>
               "My hierarchy of life is simple: <span style={{ color: 'var(--brand-gold)' }}>God first</span>, then family, then business."
             </h2>
             <cite style={{ display: 'block', marginTop: '3rem', textTransform: 'uppercase', letterSpacing: '4px', color: 'var(--brand-gold)', fontWeight: 800, fontSize: '0.9rem' }}>
@@ -89,9 +90,9 @@ const Biography = () => {
       {/* Narrative Section - The Journey */}
       <section className="section">
         <div className="container">
-          <div className="grid-2" style={{ gap: '6rem' }}>
+          <div className="grid-2 responsive-gap">
             <div>
-              <h3 style={{ borderLeft: '4px solid var(--secondary-color)', paddingLeft: '1.5rem', marginBottom: '2rem' }}>
+              <h3 style={{ borderLeft: '4px solid var(--brand-gold)', paddingLeft: '1.5rem', marginBottom: '2rem' }}>
                 From Computer Science to Real Estate Tycoon
               </h3>
               <p className="mb-4">
@@ -102,7 +103,7 @@ const Biography = () => {
               </p>
             </div>
             <div>
-              <h3 style={{ borderLeft: '4px solid var(--secondary-color)', paddingLeft: '1.5rem', marginBottom: '2rem' }}>
+              <h3 style={{ borderLeft: '4px solid var(--brand-gold)', paddingLeft: '1.5rem', marginBottom: '2rem' }}>
                 A Partnership Built on Trust
               </h3>
               <p className="mb-4">
